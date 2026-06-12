@@ -1,0 +1,352 @@
+@page "/about"
+@inject IJSRuntime JS
+
+<PageTitle>About Us - CeyBEC Campus</PageTitle>
+
+<main style="background:#f8fafc;display:block;">
+
+    <!-- ═══════ HERO BANNER (compact, same theme as Home) ═══════ -->
+    <section style="position:relative;background:#002147;padding-top:4rem;padding-bottom:7rem;border-bottom-left-radius:3rem;border-bottom-right-radius:3rem;overflow:hidden;margin-top:0;">
+        <!-- Background overlays -->
+        <div style="position:absolute;inset:0;background:rgba(0,33,71,0.75);z-index:1;"></div>
+        <div style="position:absolute;inset:0;opacity:0.35;background:radial-gradient(circle at top right,#00b4d8,#002147,#002147);z-index:1;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,#002147 0%,rgba(0,33,71,0.2) 60%,transparent 100%);z-index:1;"></div>
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;z-index:0;" alt="" />
+        <!-- Particles placeholder -->
+        <div id="about-particles" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;"></div>
+
+        <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:0 2rem;text-align:center;">
+            <div class="about-hero-in" style="margin-bottom:0.75rem;">
+                <span style="color:#00b4d8;font-weight:700;letter-spacing:0.22em;font-size:0.75rem;text-transform:uppercase;border-bottom:1px solid rgba(0,180,216,0.3);padding-bottom:0.4rem;display:inline-block;">
+                    Ceylon Bio-Engineering &amp; E-Commerce
+                </span>
+            </div>
+            <h1 class="about-hero-in font-serif font-bold text-white" style="font-size:clamp(2.2rem,5vw,3.8rem);margin-bottom:1rem;line-height:1.2;">
+                About <span style="background:linear-gradient(to right,#00b4d8,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">CeyBEC Campus</span>
+            </h1>
+            <p class="about-hero-in" style="color:#cbd5e1;font-size:clamp(0.95rem,1.8vw,1.1rem);max-width:44rem;margin:0 auto;">
+                A premier institution bridging technology and commerce, empowering future leaders through innovation and global partnerships.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ DIRECTOR + HISTORY ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:-4rem auto 5rem;padding:0 2rem;box-sizing:border-box;position:relative;z-index:20;">
+        <div style="background:white;border-radius:2.5rem;padding:clamp(2rem,5vw,4rem);box-shadow:0 25px 60px rgba(0,0,0,0.08);border:1px solid #eef2f7;">
+            <div class="about-two-col" style="display:grid;grid-template-columns:1fr 1.6fr;gap:3.5rem;align-items:center;">
+
+                <!-- Director image card -->
+                <div class="about-fade" style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;">
+                    <div style="position:relative;width:100%;max-width:320px;">
+                        <div style="position:absolute;inset:-0.75rem;background:linear-gradient(135deg,#00b4d8,#002147);border-radius:2rem;opacity:0.15;z-index:0;"></div>
+                        <img src="images/director.png" alt="R.M.A.S. Bandara – Director"
+                             style="position:relative;z-index:1;width:100%;border-radius:1.75rem;object-fit:cover;box-shadow:0 20px 50px rgba(0,33,71,0.20);" />
+                    </div>
+                    <!-- Director quote card -->
+                    <div style="background:linear-gradient(135deg,#002147,#0a3060);border-radius:1.5rem;padding:1.5rem 1.75rem;max-width:320px;width:100%;box-shadow:0 12px 30px rgba(0,33,71,0.25);">
+                        <i data-lucide="quote" style="color:#00b4d8;width:1.5rem;height:1.5rem;margin-bottom:0.75rem;display:block;"></i>
+                        <p style="color:rgba(255,255,255,0.9);font-size:0.92rem;line-height:1.7;font-style:italic;margin-bottom:1rem;">
+                            "At CeyBEC Campus, we empower students with the skills and knowledge to succeed through innovation and excellence."
+                        </p>
+                        <div style="border-top:1px solid rgba(255,255,255,0.15);padding-top:0.85rem;">
+                            <div style="font-weight:700;color:white;font-size:0.9rem;">R.M.A.S. Bandara</div>
+                            <div style="color:#00b4d8;font-size:0.78rem;font-weight:600;letter-spacing:0.05em;">Director, CeyBEC Campus</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History text -->
+                <div class="about-fade">
+                    <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.85rem;">History &amp; Background</p>
+                    <h2 class="font-serif font-bold" style="font-size:clamp(1.8rem,3.5vw,2.6rem);color:#002147;line-height:1.2;margin-bottom:1.25rem;">
+                        Where Innovation Meets Academic Excellence
+                    </h2>
+                    <p style="color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:1rem;">
+                        CeyBEC Campus, officially known as the Ceylon Bio-Engineering and E-Commerce Campus, has a rich history rooted in innovation and a commitment to excellence in education.
+                    </p>
+                    <p style="color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:2rem;">
+                        Founded with the vision of bridging the gap between technology and commerce, CeyBEC Campus has evolved into a premier institution known for its cutting-edge programs and global partnerships.
+                    </p>
+
+                    <!-- Timeline -->
+                    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+                        @foreach (var item in _timeline)
+                        {
+                            <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+                                <div style="width:2.5rem;height:2.5rem;background:#002147;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                                    <i data-lucide="@item.Icon" style="color:#00b4d8;width:1.1rem;height:1.1rem;"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700;color:#002147;font-size:0.95rem;margin-bottom:0.2rem;">@item.Title</div>
+                                    <div style="color:#64748b;font-size:0.88rem;line-height:1.6;">@item.Text</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ STATS ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 5rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;" class="stats-grid">
+            @foreach (var s in _stats)
+            {
+                <div class="about-fade" style="background:white;border-radius:1.5rem;padding:2rem 1.5rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid #eef2f7;">
+                    <div style="width:2.75rem;height:2.75rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                        <i data-lucide="@s.Icon" style="color:#00b4d8;width:1.2rem;height:1.2rem;"></i>
+                    </div>
+                    <div style="font-size:2.25rem;font-weight:900;color:#002147;letter-spacing:-0.04em;line-height:1;margin-bottom:0.4rem;">
+                        <span class="counter" data-target="@s.Value">0</span>+
+                    </div>
+                    <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#94a3b8;">@s.Label</div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- ═══════ PROGRAMS OFFERED ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 5rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="background:linear-gradient(135deg,#002147 0%,#0a3060 100%);border-radius:2.5rem;padding:clamp(2rem,4vw,3.5rem);position:relative;overflow:hidden;">
+            <div style="position:absolute;right:-4rem;top:-4rem;width:18rem;height:18rem;background:rgba(0,180,216,0.08);border-radius:9999px;filter:blur(3rem);pointer-events:none;"></div>
+            <div style="position:absolute;left:-3rem;bottom:-3rem;width:14rem;height:14rem;background:rgba(0,180,216,0.06);border-radius:9999px;filter:blur(2.5rem);pointer-events:none;"></div>
+            <div style="position:relative;z-index:1;">
+                <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.75rem;">Academic Portfolio</p>
+                <h2 class="font-serif font-bold" style="font-size:clamp(1.6rem,3vw,2.2rem);color:white;margin-bottom:2rem;">Programs Offered</h2>
+                <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+                    @foreach (var prog in _programs)
+                    {
+                        <span style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.55rem 1.1rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:9999px;color:white;font-size:0.85rem;font-weight:600;backdrop-filter:blur(4px);">
+                            <span style="width:0.45rem;height:0.45rem;background:#00b4d8;border-radius:9999px;flex-shrink:0;display:inline-block;"></span>
+                            @prog
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ GLOBAL PARTNERSHIPS ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 5rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="background:white;border-radius:2.5rem;padding:clamp(2rem,5vw,3.5rem);box-shadow:0 20px 50px rgba(0,0,0,0.06);border:1px solid #eef2f7;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;" class="about-two-col">
+            <div class="about-fade">
+                <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.75rem;">Worldwide Reach</p>
+                <h2 class="font-serif font-bold" style="font-size:clamp(1.6rem,3vw,2.4rem);color:#002147;line-height:1.2;margin-bottom:1.25rem;">Global Partnerships</h2>
+                <p style="color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:1.5rem;">
+                    CeyBEC Campus is the Sri Lanka Student Recruitment Partner of <strong style="color:#002147;">850+ Universities</strong> and a partner campus of ICA University in New Zealand, facilitating seamless transitions for students seeking further education abroad.
+                </p>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                    @foreach (var country in new[]{"🇳🇿 New Zealand","🇬🇧 United Kingdom","🇨🇦 Canada","🇯🇵 Japan","🇸🇬 Singapore"})
+                    {
+                        <span style="padding:0.45rem 1rem;background:#f0f9ff;border:1px solid #bae6fd;border-radius:9999px;font-size:0.82rem;font-weight:600;color:#002147;">@country</span>
+                    }
+                </div>
+            </div>
+            <div class="about-fade" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                @foreach (var p in _partnerStats)
+                {
+                    <div style="background:#f8fafc;border-radius:1.25rem;padding:1.5rem;text-align:center;border:1px solid #eef2f7;">
+                        <div style="font-size:1.75rem;font-weight:900;color:#002147;letter-spacing:-0.04em;line-height:1;margin-bottom:0.35rem;">@p.Value</div>
+                        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#94a3b8;">@p.Label</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ QUICK LINKS ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 3rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="background:linear-gradient(135deg,#002147,#0a3060);border-radius:2rem;padding:2rem 2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem;box-shadow:0 12px 40px rgba(0,33,71,0.25);">
+            <div>
+                <p style="color:#00b4d8;font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 0.25rem;">Quick Access</p>
+                <h3 style="color:white;font-size:1.2rem;font-weight:800;margin:0;line-height:1.3;">Student Portal &amp; Registration</h3>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.875rem;">
+                <a href="https://dushman-002-site3.mtempurl.com/" target="_blank" rel="noopener"
+                   style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.75rem 1.5rem;background:#00b4d8;color:#002147;border-radius:9999px;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 14px rgba(0,180,216,0.4);transition:all 0.2s;"
+                   onmouseover="this.style.background='white';this.style.transform='translateY(-2px)'"
+                   onmouseout="this.style.background='#00b4d8';this.style.transform='translateY(0)'">
+                    <i data-lucide="layout-dashboard" style="width:1rem;height:1rem;"></i>
+                    Student LMS
+                </a>
+                <a href="/login"
+                   style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.75rem 1.5rem;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:9999px;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;backdrop-filter:blur(4px);"
+                   onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.transform='translateY(-2px)'"
+                   onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.transform='translateY(0)'">
+                    <i data-lucide="user-circle" style="width:1rem;height:1rem;"></i>
+                    Login / Register
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ PAYMENT SECTION ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 6rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="text-align:center;margin-bottom:3rem;">
+            <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.5rem;">Easy &amp; Secure</p>
+            <h2 class="font-serif font-bold" style="font-size:clamp(1.6rem,3vw,2.4rem);color:#002147;">Payment Information</h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="payment-grid">
+
+            <!-- Bank QR -->
+            <div class="about-fade" style="background:white;border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.07);border:1px solid #eef2f7;">
+                <div style="width:3rem;height:3rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                    <i data-lucide="qr-code" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:#002147;font-size:1rem;margin-bottom:1.25rem;">Bank Account Details</h3>
+                <div style="background:#f8fafc;border-radius:1.25rem;padding:1rem;border:1px solid #eef2f7;margin-bottom:1rem;">
+                    <img src="images/CeyBEC_Campus_Bank_Details_QR.png" alt="Bank QR Code"
+                         style="width:100%;max-width:180px;display:block;margin:0 auto;border-radius:0.5rem;" />
+                </div>
+                <p style="color:#64748b;font-size:0.85rem;">Scan QR code for bank transfer details</p>
+            </div>
+
+            <!-- Card Payments -->
+            <div class="about-fade" style="background:white;border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.07);border:1px solid #eef2f7;">
+                <div style="width:3rem;height:3rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                    <i data-lucide="credit-card" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:#002147;font-size:1rem;margin-bottom:1.25rem;">Credit / Debit Card</h3>
+                <div style="background:#f8fafc;border-radius:1.25rem;padding:1.25rem;border:1px solid #eef2f7;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;min-height:100px;">
+                    <img src="images/B6-300x74.png" alt="Visa MasterCard American Express"
+                         style="max-width:220px;width:100%;display:block;" />
+                </div>
+                <p style="color:#64748b;font-size:0.85rem;">We accept all major credit &amp; debit cards</p>
+            </div>
+
+            <!-- Contact / Assistance -->
+            <div class="about-fade" style="background:linear-gradient(135deg,#002147,#0a3060);border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,33,71,0.25);position:relative;overflow:hidden;">
+                <div style="position:absolute;right:-2rem;bottom:-2rem;width:10rem;height:10rem;background:rgba(0,180,216,0.08);border-radius:9999px;filter:blur(2rem);"></div>
+                <div style="width:3rem;height:3rem;background:rgba(255,255,255,0.12);border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:1px solid rgba(255,255,255,0.2);">
+                    <i data-lucide="headphones" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:white;font-size:1rem;margin-bottom:1.25rem;">Need Assistance?</h3>
+                <div style="display:flex;flex-direction:column;gap:0.85rem;position:relative;z-index:1;">
+                    <a href="tel:+94777682692" style="display:flex;align-items:center;justify-content:center;gap:0.65rem;background:white;border:1px solid rgba(255,255,255,0.3);border-radius:0.875rem;padding:0.75rem 1rem;text-decoration:none;color:#002147;font-size:0.88rem;font-weight:600;transition:background 0.2s;"
+                       onmouseover="this.style.background='#00b4d8';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#002147'">
+                        <i data-lucide="phone" style="width:1rem;height:1rem;color:#00b4d8;flex-shrink:0;"></i>
+                        +94 777 682 692
+                    </a>
+                    <a href="mailto:info@ceybec.com" style="display:flex;align-items:center;justify-content:center;gap:0.65rem;background:white;border:1px solid rgba(255,255,255,0.3);border-radius:0.875rem;padding:0.75rem 1rem;text-decoration:none;color:#002147;font-size:0.88rem;font-weight:600;transition:background 0.2s;"
+                       onmouseover="this.style.background='#00b4d8';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#002147'">
+                        <i data-lucide="mail" style="width:1rem;height:1rem;color:#00b4d8;flex-shrink:0;"></i>
+                        info@ceybec.com
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<style>
+    /* ── Hero entrance animations ────────────────────────────────────────── */
+    .about-hero-in {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: aboutFadeUp 0.7s ease forwards;
+    }
+    .about-hero-in:nth-child(1) { animation-delay: 0.1s; }
+    .about-hero-in:nth-child(2) { animation-delay: 0.25s; }
+    .about-hero-in:nth-child(3) { animation-delay: 0.4s; }
+
+    @@keyframes aboutFadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Scroll-fade elements ────────────────────────────────────────────── */
+    .about-fade {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .about-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ── Responsive two-column grid ──────────────────────────────────────── */
+    .about-two-col {
+        grid-template-columns: 1fr 1.6fr;
+    }
+    @@media (max-width: 900px) {
+        .about-two-col {
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+        }
+    }
+
+    /* ── Stats grid ──────────────────────────────────────────────────────── */
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @@media (max-width: 900px) {
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+    @@media (max-width: 480px) {
+        .stats-grid {
+            grid-template-columns: 1fr 1fr !important;
+        }
+    }
+
+    /* ── Payment grid ────────────────────────────────────────────────────── */
+    .payment-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @@media (max-width: 900px) {
+        .payment-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
+@code {
+    private record TimelineItem(string Icon, string Title, string Text);
+    private record StatItem(string Icon, int Value, string Label);
+    private record PartnerStat(string Value, string Label);
+
+    private List<TimelineItem> _timeline = new()
+    {
+        new("flag",       "Early Beginnings",        "Established in response to growing demand for specialized education in bio-engineering and e-commerce."),
+        new("building-2", "Incorporation & Expansion","Incorporated as an educational institute under Sri Lanka's Company Act No. 7."),
+        new("globe",      "Global Partnerships",      "Became Sri Lanka Student Recruitment Partner of 850+ Universities and partner campus of ICA University, New Zealand."),
+    };
+
+    private List<StatItem> _stats = new()
+    {
+        new("users",       2000, "Current Enrollments"),
+        new("graduation-cap", 90, "Qualified Staff"),
+        new("star",          80, "Clubs & Activities"),
+        new("heart",        100, "Active PTFA Members"),
+    };
+
+    private List<string> _programs = new()
+    {
+        "Business Management", "Civil Engineering", "ICT",
+        "Early Childhood Education", "Pharmacy Technician", "Bio-Technology",
+        "Robotics", "Sport Science", "Logistics & Supply Chain", "Tourism",
+    };
+
+    private List<PartnerStat> _partnerStats = new()
+    {
+        new("850+",  "University Partners"),
+        new("5",     "Countries"),
+        new("100%",  "Globally Recognised"),
+        new("Since\n2010", "Established"),
+    };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("lucide.createIcons");
+            await JS.InvokeVoidAsync("initAboutPage");
+        }
+    }
+}

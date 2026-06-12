@@ -1,0 +1,54 @@
+#floating-lms-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+#floating-lms-button:hover {
+  background-color: #0056b3;
+}
+
+#floating-lms-button #lms-text {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  right: 70px;
+  background: #343a40;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-size: 14px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#floating-lms-button:hover #lms-text {
+  opacity: 1;
+  visibility: visible;
+}
+.icon-tiktok {
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+  font-style: normal;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  color: aliceblue;
+}
+
+.icon-tiktok:before {
+  content: "\e07b"; /* Unicode for TikTok logo in Font Awesome 6 */
+}

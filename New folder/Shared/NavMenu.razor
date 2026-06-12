@@ -1,0 +1,188 @@
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+@implements IDisposable
+
+<!-- Top contact bar — visible on all sizes; compact on mobile, right-aligned on md+ -->
+<div class="flex justify-center md:justify-end items-center px-4 md:px-8 text-slate-300 font-medium"
+     style="background:#002147;border-bottom:1px solid rgba(255,255,255,0.08);position:fixed;top:0;left:0;right:0;z-index:51;height:1.75rem;">
+    <div class="flex gap-4 md:gap-6" style="font-size:0.68rem;">
+        <span class="flex items-center gap-1">
+            <i class="fa-solid fa-envelope" style="font-size:0.65rem;opacity:0.7;"></i>
+            <span class="hidden xs:inline" style="color:white">info@ceybec.lk</span>
+            <span class="xs:hidden" style="letter-spacing:0.01em; color:white">info@ceybec.lk</span>
+        </span>
+        <span style="opacity:0.3;">|</span>
+        <span class="flex items-center gap-1" style="color:white">
+            <i class="fa-solid fa-phone" style="font-size:0.65rem;opacity:0.7;"></i>
+            +94 777 682 692
+        </span>
+    </div>
+</div>
+
+<!-- Main navbar — uses only inline style + Tailwind utilities; NO legacy CSS class dependency -->
+<header id="navbar"
+        style="position:fixed;top:1.75rem;left:0;right:0;z-index:50;background:#002147;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;">
+        <div class="flex justify-between items-center" style="height:4.5rem;">
+
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3" style="text-decoration:none;flex-shrink:0;">
+                <img src="images/logo.png" alt="CeyBEC Campus Logo"
+                     style="height:4rem;width:auto;object-fit:contain;"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div style="display:none;align-items:center;gap:0.5rem;">
+                    <div style="width:2.25rem;height:2.25rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:0.5rem;display:flex;align-items:center;justify-content:center;">
+                        <i class="fa-solid fa-graduation-cap" style="color:white;font-size:1rem;"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight:800;color:white;font-size:1.05rem;line-height:1;letter-spacing:-0.01em;">CeyBEC</div>
+                        <div style="color:#94a3b8;font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;margin-top:2px;">C A M P U S</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop nav -->
+            <nav class="hidden lg:flex items-center" style="gap:2rem;">
+                <a href="/home" class="nav-link-item @(IsActive("/home") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">Home</a>
+                <a href="/about" class="nav-link-item @(IsActive("/about") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">About Us</a>
+                <a href="/academics" class="nav-link-item @(IsActive("/academics") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">Academics</a>
+                <a href="/activity" class="nav-link-item @(IsActive("/activity") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">Activity</a>
+                <a href="/abroad" class="nav-link-item @(IsActive("/abroad") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">Study Abroad</a>
+                <a href="/contact" class="nav-link-item @(IsActive("/contact") ? "nav-active" : "")" style="text-decoration:none;transition:color 0.2s;">Contact Us</a>
+                <a href="/login"
+                   class="text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5"
+                   style="padding:0.5rem 1.25rem;background:linear-gradient(135deg,#22c55e,#16a34a);border-radius:9999px;box-shadow:0 4px 14px rgba(34,197,94,0.35);text-decoration:none;">
+                    Login / Register
+                </a>
+                <a href="https://dushman-002-site2.mtempurl.com/Account/Login/" target="_blank"
+                   class="text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5"
+                   style="padding:0.5rem 1.25rem;background:linear-gradient(135deg,#0077a8,#00b4d8);border-radius:9999px;box-shadow:0 4px 14px rgba(0,180,216,0.35);text-decoration:none;">
+                    Student LMS
+                </a>
+                <a href="https://mpg.seylan.lk/ceybec-campus" target="_blank"
+                   class="text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5"
+                   style="padding:0.5rem 1.25rem;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-radius:9999px;box-shadow:0 4px 14px rgba(59,130,246,0.35);text-decoration:none;">
+                    Virtual Payment!
+                </a>
+            </nav>
+
+            <!-- Mobile hamburger — modernised pill button -->
+            <button class="flex lg:hidden items-center justify-center focus:outline-none transition-all duration-200"
+                    @onclick="ToggleMobileMenu"
+                    aria-label="Toggle menu"
+                    style="width:2.5rem;height:2.5rem;border-radius:0.625rem;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.07);color:white;cursor:pointer;transition:background 0.2s,border-color 0.2s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(255,255,255,0.35)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.07)';this.style.borderColor='rgba(255,255,255,0.18)';">
+                @if (_mobileOpen)
+                {
+                    <i class="fa-solid fa-xmark" style="font-size:1rem;"></i>
+                }
+                else
+                {
+                    <i class="fa-solid fa-bars" style="font-size:1rem;"></i>
+                }
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu-dropdown"
+         style="max-height:0;overflow:hidden;opacity:0;background:#002147;border-top:1px solid rgba(255,255,255,0.1);position:absolute;width:100%;box-shadow:0 20px 40px rgba(0,0,0,0.3);transition:max-height 0.3s ease,opacity 0.3s ease;">
+        <div style="padding:0.5rem 1rem 1.5rem;display:flex;flex-direction:column;gap:0.25rem;">
+            <a href="/home" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/home") ? "mobile-nav-active" : "")" style="text-decoration:none;">Home</a>
+            <a href="/about" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/about") ? "mobile-nav-active" : "")" style="text-decoration:none;">About Us</a>
+            <a href="/academics" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/academics") ? "mobile-nav-active" : "")" style="text-decoration:none;">Academics</a>
+            <a href="/activity" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/activity") ? "mobile-nav-active" : "")" style="text-decoration:none;">Activity</a>
+            <a href="/abroad" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/abroad") ? "mobile-nav-active" : "")" style="text-decoration:none;">Study Abroad</a>
+            <a href="/contact" class="block px-3 py-3 rounded-md font-medium mobile-nav-link @(IsActive("/contact") ? "mobile-nav-active" : "")" style="text-decoration:none;">Contact Us</a>
+            <a href="/login" class="mt-2 block text-center py-3 rounded-full font-bold text-white"
+               style="background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 14px rgba(34,197,94,0.3);text-decoration:none;">
+                Login / Register
+            </a>
+            <a href="https://dushman-002-site3.mtempurl.com/" target="_blank"
+               class="mt-1 block text-center py-3 rounded-full font-bold text-white"
+               style="background:linear-gradient(135deg,#0077a8,#00b4d8);box-shadow:0 4px 14px rgba(0,180,216,0.3);text-decoration:none;">
+                Student LMS
+            </a>
+            <a href="https://mpg.seylan.lk/ceybec-campus" target="_blank"
+               class="mt-1 block text-center py-3 rounded-full font-bold text-white"
+               style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);box-shadow:0 4px 14px rgba(59,130,246,0.3);text-decoration:none;">
+                Virtual Payment!
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Spacer: contact bar (1.75rem) + navbar (4.5rem) = 6.25rem -->
+<div style="height:6.25rem;"></div>
+
+<style>
+    /* Desktop nav link */
+    .nav-link-item {
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: #cbd5e1;
+        position: relative;
+        padding-bottom: 2px;
+    }
+    .nav-link-item::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #00b4d8;
+        border-radius: 9999px;
+        transform: scaleX(0);
+        transition: transform 0.2s ease;
+    }
+    .nav-link-item:hover { color: white; }
+    .nav-link-item:hover::after { transform: scaleX(1); }
+    .nav-active { color: #00b4d8 !important; }
+    .nav-active::after { transform: scaleX(1) !important; }
+
+    /* Mobile nav link */
+    .mobile-nav-link { color: #cbd5e1; }
+    .mobile-nav-link:hover { background: rgba(255,255,255,0.07); color: white; }
+    .mobile-nav-active {
+        color: #00b4d8 !important;
+        background: rgba(0,180,216,0.1) !important;
+        border-left: 3px solid #00b4d8;
+        padding-left: calc(0.75rem - 3px) !important;
+    }
+</style>
+
+@code {
+    private bool _mobileOpen = false;
+
+    private bool IsActive(string href)
+    {
+        var current = Nav.ToBaseRelativePath(Nav.Uri).TrimEnd('/');
+        var path = href.TrimStart('/');
+        return current.Equals(path, StringComparison.OrdinalIgnoreCase);
+    }
+
+    protected override void OnInitialized()
+    {
+        Nav.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        Nav.LocationChanged -= OnLocationChanged;
+    }
+
+    private async Task ToggleMobileMenu()
+    {
+        _mobileOpen = !_mobileOpen;
+        await JS.InvokeVoidAsync("toggleMobileMenu", _mobileOpen);
+    }
+}
+

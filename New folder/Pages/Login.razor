@@ -1,0 +1,315 @@
+@page "/login"
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<PageTitle>Login / Register – CeyBEC Campus</PageTitle>
+
+<main style="min-height:100vh;background:linear-gradient(135deg,#001633 0%,#002147 50%,#003370 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6.5rem 1rem 3rem;">
+
+    <!-- Logo + heading -->
+    <div style="text-align:center;margin-bottom:2.5rem;">
+        <a href="/" style="display:inline-block;margin-bottom:1.25rem;text-decoration:none;">
+            <img src="images/logo.png" alt="CeyBEC Campus" style="height:3.5rem;width:auto;"
+                 onerror="this.style.display='none';">
+        </a>
+        <h1 style="color:white;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;margin:0 0 0.35rem;letter-spacing:-0.02em;">
+            Welcome to <span style="background:linear-gradient(to right,#00b4d8,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">CeyBEC Campus</span>
+        </h1>
+        <p style="color:#94a3b8;font-size:0.95rem;margin:0;">Sign in to your account or create a new one</p>
+        <div style="margin-top:1rem;">
+            <a href="https://dushman-002-site3.mtempurl.com/" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.25rem;background:rgba(0,180,216,0.15);border:1px solid rgba(0,180,216,0.35);border-radius:9999px;color:#00b4d8;font-size:0.82rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
+               onmouseover="this.style.background='rgba(0,180,216,0.28)'"
+               onmouseout="this.style.background='rgba(0,180,216,0.15)'">
+                <i data-lucide="layout-dashboard" style="width:0.9rem;height:0.9rem;"></i>
+                Go to Student LMS
+            </a>
+        </div>
+    </div>
+
+    <!-- Card -->
+    <div style="width:100%;max-width:520px;background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:2rem;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.4);">
+
+        <!-- Tab switcher -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.08);">
+            <button @onclick='()=>_tab="login"'
+                    style="padding:1rem;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;border:none;cursor:pointer;transition:all 0.2s;
+                           background:@(_tab=="login" ? "rgba(0,180,216,0.15)" : "transparent");
+                           color:@(_tab=="login" ? "#00b4d8" : "#64748b");
+                           border-bottom:@(_tab=="login" ? "2px solid #00b4d8" : "2px solid transparent");">
+                Sign In
+            </button>
+            <button @onclick='()=>_tab="register"'
+                    style="padding:1rem;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;border:none;cursor:pointer;transition:all 0.2s;
+                           background:@(_tab=="register" ? "rgba(0,180,216,0.15)" : "transparent");
+                           color:@(_tab=="register" ? "#00b4d8" : "#64748b");
+                           border-bottom:@(_tab=="register" ? "2px solid #00b4d8" : "2px solid transparent");">
+                Register
+            </button>
+        </div>
+
+        <div style="padding:clamp(1.5rem,4vw,2.5rem);">
+
+            <!-- ── LOGIN TAB ── -->
+            @if (_tab == "login")
+            {
+                <EditForm Model="_login" OnValidSubmit="HandleLogin">
+                    <DataAnnotationsValidator />
+
+                    @if (!string.IsNullOrEmpty(_loginError))
+                    {
+                        <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:0.875rem;padding:0.75rem 1rem;margin-bottom:1.25rem;color:#fca5a5;font-size:0.85rem;">
+                            @_loginError
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(_loginSuccess))
+                    {
+                        <div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:0.875rem;padding:0.75rem 1rem;margin-bottom:1.25rem;color:#86efac;font-size:0.85rem;">
+                            @_loginSuccess
+                        </div>
+                    }
+
+                    <div style="margin-bottom:1.1rem;">
+                        <label style="display:block;color:#cbd5e1;font-size:0.82rem;font-weight:600;margin-bottom:0.4rem;letter-spacing:0.04em;">EMAIL ADDRESS</label>
+                        <InputText @bind-Value="_login.Email" placeholder="you@example.com"
+                                   style="width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.875rem;color:white;font-size:0.95rem;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
+                                   onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                        <ValidationMessage For="@(()=>_login.Email)" style="color:#fca5a5;font-size:0.78rem;margin-top:0.25rem;display:block;" />
+                    </div>
+
+                    <div style="margin-bottom:1.5rem;">
+                        <label style="display:block;color:#cbd5e1;font-size:0.82rem;font-weight:600;margin-bottom:0.4rem;letter-spacing:0.04em;">PASSWORD</label>
+                        <InputText @bind-Value="_login.Password" type="password" placeholder="••••••••"
+                                   style="width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.875rem;color:white;font-size:0.95rem;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
+                                   onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                        <ValidationMessage For="@(()=>_login.Password)" style="color:#fca5a5;font-size:0.78rem;margin-top:0.25rem;display:block;" />
+                    </div>
+
+                    <button type="submit" style="width:100%;padding:0.875rem;background:linear-gradient(135deg,#0077a8,#00b4d8);border:none;border-radius:0.875rem;color:white;font-weight:700;font-size:0.95rem;cursor:pointer;letter-spacing:0.03em;box-shadow:0 6px 20px rgba(0,180,216,0.35);transition:transform 0.2s,box-shadow 0.2s;"
+                            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(0,180,216,0.5)'"
+                            onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(0,180,216,0.35)'">
+                        Sign In
+                    </button>
+
+                    <p style="text-align:center;margin-top:1.25rem;color:#64748b;font-size:0.85rem;">
+                        Don't have an account?
+                        <button type="button" @onclick='()=>_tab="register"'
+                                style="background:none;border:none;color:#00b4d8;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem;">
+                            Register here
+                        </button>
+                    </p>
+                </EditForm>
+            }
+
+            <!-- ── REGISTER TAB ── -->
+            @if (_tab == "register")
+            {
+                <EditForm Model="_reg" OnValidSubmit="HandleRegister">
+                    <DataAnnotationsValidator />
+
+                    @if (!string.IsNullOrEmpty(_regError))
+                    {
+                        <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:0.875rem;padding:0.75rem 1rem;margin-bottom:1.25rem;color:#fca5a5;font-size:0.85rem;">
+                            @_regError
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(_regSuccess))
+                    {
+                        <div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:0.875rem;padding:0.75rem 1rem;margin-bottom:1.25rem;color:#86efac;font-size:0.85rem;">
+                            @_regSuccess
+                        </div>
+                    }
+
+                    <!-- Row: full name + NIC -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.1rem;" class="login-form-row">
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">FULL NAME</label>
+                            <InputText @bind-Value="_reg.FullName" placeholder="Your full name"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.FullName)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">NIC / PASSPORT</label>
+                            <InputText @bind-Value="_reg.NIC" placeholder="NIC or Passport"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.NIC)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                    </div>
+
+                    <!-- Row: email + phone -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.1rem;" class="login-form-row">
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">EMAIL</label>
+                            <InputText @bind-Value="_reg.Email" placeholder="you@example.com"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.Email)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">PHONE</label>
+                            <InputText @bind-Value="_reg.Phone" placeholder="07XXXXXXXX"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.Phone)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div style="margin-bottom:1.1rem;">
+                        <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">ADDRESS</label>
+                        <InputTextArea @bind-Value="_reg.Address" rows="2" placeholder="Your address"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;resize:vertical;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                        <ValidationMessage For="@(()=>_reg.Address)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                    </div>
+
+                    <!-- Course -->
+                    <div style="margin-bottom:1.1rem;">
+                        <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">COURSE</label>
+                        <InputSelect @bind-Value="_reg.Course"
+                                     style="width:100%;padding:0.7rem 0.9rem;background:rgba(20,30,50,0.95);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;">
+                            <option value="">Choose a course…</option>
+                            <option>Psychosocial Assistant (NVQ)</option>
+                            <option>Pharmacy Technician</option>
+                            <option>Caregiver (NVQ)</option>
+                            <option>Psychology &amp; Counselling</option>
+                            <option>AAT Stages: 1/2/3</option>
+                            <option>Civil Engineering</option>
+                            <option>IELTS Preparation</option>
+                            <option>JLPT Preparation</option>
+                        </InputSelect>
+                        <ValidationMessage For="@(()=>_reg.Course)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                    </div>
+
+                    <!-- Row: password + confirm -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.5rem;" class="login-form-row">
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">PASSWORD</label>
+                            <InputText @bind-Value="_reg.Password" type="password" placeholder="Min 6 chars"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.Password)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                        <div>
+                            <label style="display:block;color:#cbd5e1;font-size:0.78rem;font-weight:600;margin-bottom:0.35rem;letter-spacing:0.04em;">CONFIRM</label>
+                            <InputText @bind-Value="_reg.ConfirmPassword" type="password" placeholder="Repeat password"
+                                       style="width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:0.75rem;color:white;font-size:0.88rem;outline:none;box-sizing:border-box;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'" />
+                            <ValidationMessage For="@(()=>_reg.ConfirmPassword)" style="color:#fca5a5;font-size:0.75rem;margin-top:0.2rem;display:block;" />
+                        </div>
+                    </div>
+
+                    <button type="submit" style="width:100%;padding:0.875rem;background:linear-gradient(135deg,#16a34a,#22c55e);border:none;border-radius:0.875rem;color:white;font-weight:700;font-size:0.95rem;cursor:pointer;letter-spacing:0.03em;box-shadow:0 6px 20px rgba(34,197,94,0.35);transition:transform 0.2s,box-shadow 0.2s;"
+                            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(34,197,94,0.5)'"
+                            onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(34,197,94,0.35)'">
+                        Create Account
+                    </button>
+
+                    <p style="text-align:center;margin-top:1.25rem;color:#64748b;font-size:0.85rem;">
+                        Already have an account?
+                        <button type="button" @onclick='()=>_tab="login"'
+                                style="background:none;border:none;color:#00b4d8;font-weight:700;cursor:pointer;padding:0;font-size:0.85rem;">
+                            Sign in
+                        </button>
+                    </p>
+                </EditForm>
+            }
+        </div>
+    </div>
+
+    <!-- Back to home -->
+    <a href="/" style="margin-top:2rem;color:#475569;font-size:0.85rem;text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;"
+       onmouseover="this.style.color='#00b4d8'" onmouseout="this.style.color='#475569'">
+        ← Back to Home
+    </a>
+</main>
+
+<style>
+    @@media (max-width: 500px) {
+        .login-form-row {
+            grid-template-columns: 1fr !important;
+        }
+    }
+    /* Override autofill background */
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 100px #0d2240 inset !important;
+        -webkit-text-fill-color: white !important;
+    }
+</style>
+
+@code {
+    private string _tab = "login";
+
+    /* ── Login model ─────────────────────────────────────────────── */
+    private LoginModel _login = new();
+    private string _loginError = "";
+    private string _loginSuccess = "";
+
+    private void HandleLogin()
+    {
+        _loginError = "";
+        // Placeholder: wire up real auth here
+        _loginSuccess = "Welcome back! Redirecting…";
+        // Nav.NavigateTo("/dashboard");
+    }
+
+    /* ── Register model ──────────────────────────────────────────── */
+    private RegisterModel _reg = new();
+    private string _regError = "";
+    private string _regSuccess = "";
+
+    private void HandleRegister()
+    {
+        _regError = "";
+        if (_reg.Password != _reg.ConfirmPassword)
+        {
+            _regError = "Passwords do not match.";
+            return;
+        }
+        _regSuccess = "Registration successful! Welcome to CeyBEC Campus.";
+        _reg = new RegisterModel();
+    }
+
+    /* ── Models ──────────────────────────────────────────────────── */
+    public class LoginModel
+    {
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Email is required.")]
+        [System.ComponentModel.DataAnnotations.EmailAddress(ErrorMessage = "Enter a valid email.")]
+        public string Email { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Password is required.")]
+        public string Password { get; set; } = "";
+    }
+
+    public class RegisterModel
+    {
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Full name is required.")]
+        public string FullName { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Email is required.")]
+        [System.ComponentModel.DataAnnotations.EmailAddress]
+        public string Email { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Phone number is required.")]
+        [System.ComponentModel.DataAnnotations.RegularExpression(@"[0-9]{10}", ErrorMessage = "Must be 10 digits.")]
+        public string Phone { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "NIC or Passport is required.")]
+        public string NIC { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Address is required.")]
+        public string Address { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please select a course.")]
+        public string Course { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Password must be at least 6 characters.")]
+        [System.ComponentModel.DataAnnotations.MinLength(6)]
+        public string Password { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please confirm your password.")]
+        public string ConfirmPassword { get; set; } = "";
+    }
+}

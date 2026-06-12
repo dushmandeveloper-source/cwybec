@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>CeyBEC Campus - Excellence in Higher Education</title>
+    <base href="/" />
+    <link rel="preload" id="webassembly" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: { preflight: false },
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#002147',
+                            cyan: '#00b4d8',
+                            light: '#f8fafc',
+                        },
+                        action: {
+                            lms: '#5cb85c',
+                            lmsDark: '#4cae4c',
+                            reg: '#5F7D7E',
+                            regDark: '#4A6667',
+                            pay: '#1A67A4',
+                            payDark: '#135183',
+                            info: '#d9534f',
+                            infoDark: '#c9302c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Legacy plugin CSS (used by non-home pages) -->
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="css/ionicons.min.css" />
+    <link rel="stylesheet" href="css/flaticon.css" />
+    <link rel="stylesheet" href="css/icomoon.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="CeyBEC.styles.css" rel="stylesheet" />
+    <script type="importmap"></script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Make #app fill full viewport */
+        #app {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+            background-color: #f8fafc;
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #002147; }
+
+        /* Anime.js Particles */
+        #anime-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            will-change: transform, opacity;
+        }
+
+        /* Character split for GSAP animation */
+        .char {
+            display: inline-block;
+            opacity: 0;
+            color: #ffffff;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        /* Action Buttons */
+        .hero-img {
+            will-change: transform;
+        }
+
+        .academic-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Buttons start visible — GSAP adds entry effect but never hides them */
+            opacity: 1;
+        }
+        .academic-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button colour classes — defined in CSS so GSAP clearProps never wipes them */
+        .btn-lms  { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); box-shadow: 0 4px 14px rgba(8,145,178,0.28); }
+        .btn-reg  { background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%); box-shadow: 0 4px 14px rgba(109,40,217,0.28); }
+        .btn-pay  { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 4px 14px rgba(37,99,235,0.28); }
+        .btn-info { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); box-shadow: 0 4px 14px rgba(217,119,6,0.28); }
+
+        /* Icon circle colours */
+        .btn-lms  .btn-icon { color: white; }
+        .btn-reg  .btn-icon { color: white; }
+        .btn-pay  .btn-icon { color: white; }
+        .btn-info .btn-icon { color: white; }
+
+        .btn-icon {
+            flex-shrink: 0;
+            width: 2.4rem; height: 2.4rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 0.5rem;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative; z-index: 10;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .academic-btn:hover .btn-icon { transform: scale(1.15); }
+
+        .btn-glow {
+            position: absolute;
+            width: 4rem; height: 4rem;
+            right: -0.75rem; top: -0.75rem;
+            background: rgba(255,255,255,0.10);
+            border-radius: 9999px;
+            filter: blur(1rem);
+            pointer-events: none;
+            transition: transform 0.5s ease;
+        }
+        .academic-btn:hover .btn-glow { transform: scale(1.5); }
+
+        .btn-label {
+            flex: 1;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding-left: 0.75rem;
+            position: relative; z-index: 10;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        @media (min-width: 1024px) { .btn-label { font-size: 0.875rem; } }
+
+        /* Scroll-reveal base state */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        /* ── Bento grid (overrides legacy Bootstrap columns) ── */
+        .bento-grid {
+            display: grid !important;
+            grid-template-columns: repeat(12, 1fr) !important;
+            gap: 2rem !important;
+            width: 100% !important;
+            float: none !important;
+        }
+        .bento-grid > * {
+            float: none !important;
+            width: auto !important;
+            min-width: 0 !important;
+        }
+        .bento-mission  { grid-column: span 8 !important; }
+        .bento-vision   { grid-column: span 4 !important; }
+        .bento-stat     { grid-column: span 3 !important; }
+        .bento-stat-dark{ grid-column: span 3 !important; }
+
+        /* ── Courses grid (overrides legacy Bootstrap columns) ── */
+        .courses-grid {
+            display: grid !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+            gap: 2rem !important;
+            width: 100% !important;
+            float: none !important;
+        }
+        .courses-grid > * {
+            float: none !important;
+            width: auto !important;
+            min-width: 0 !important;
+        }
+
+        @media (max-width: 1200px) {
+            .bento-mission  { grid-column: span 12 !important; }
+            .bento-vision   { grid-column: span 12 !important; }
+            .bento-stat     { grid-column: span 6 !important; }
+            .bento-stat-dark{ grid-column: span 6 !important; }
+            .courses-grid   { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+            .bento-stat     { grid-column: span 12 !important; }
+            .bento-stat-dark{ grid-column: span 12 !important; }
+            .courses-grid   { grid-template-columns: repeat(1, 1fr) !important; }
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="antialiased text-slate-800">
+
+    <!-- Blazor App Root -->
+    <div id="app">
+        <!-- ── Loading Screen (shown while Blazor WASM boots) ── -->
+        <div id="ceybec-loader" style="
+            position:fixed;inset:0;z-index:99999;
+            background:linear-gradient(135deg,#001633 0%,#002147 55%,#003370 100%);
+            display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+            transition:opacity 0.55s ease,visibility 0.55s ease;">
+
+            <!-- Logo -->
+            <img src="images/logo.png" alt="CeyBEC Campus"
+                 style="height:5rem;width:auto;object-fit:contain;filter:drop-shadow(0 0 18px rgba(0,180,216,0.45));animation:loader-pulse 2s ease-in-out infinite;"
+                 onerror="this.style.display='none';document.getElementById('loader-text-brand').style.display='block';">
+            <div id="loader-text-brand" style="display:none;font-family:Outfit,sans-serif;font-weight:900;font-size:1.6rem;color:white;letter-spacing:-0.02em;">
+                CeyBEC <span style="color:#00b4d8;">Campus</span>
+            </div>
+
+            <!-- Spinner ring -->
+            <div style="position:relative;width:3rem;height:3rem;">
+                <svg viewBox="0 0 50 50" style="width:100%;height:100%;animation:loader-spin 1.1s linear infinite;">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(0,180,216,0.18)" stroke-width="4"/>
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#00b4d8" stroke-width="4"
+                            stroke-linecap="round" stroke-dasharray="80 200" stroke-dashoffset="0"/>
+                </svg>
+            </div>
+
+            <!-- Label -->
+            <p style="font-family:Outfit,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin:0;">
+                Loading&hellip;
+            </p>
+        </div>
+    </div>
+
+    <style>
+        @@keyframes loader-spin  { to { transform: rotate(360deg); } }
+        @@keyframes loader-pulse {
+            0%,100% { opacity:1; transform:scale(1);   }
+            50%      { opacity:.75; transform:scale(1.05); }
+        }
+        #ceybec-loader.fade-out {
+            opacity:0 !important;
+            visibility:hidden !important;
+            pointer-events:none;
+        }
+    </style>
+    <script>
+        /* Hide the loader once Blazor has rendered its first frame */
+        (function () {
+            function hideLoader() {
+                var el = document.getElementById('ceybec-loader');
+                if (el) { el.classList.add('fade-out'); setTimeout(function(){ el.remove(); }, 600); }
+            }
+            /* Blazor WASM fires this custom event after first render */
+            document.addEventListener('blazor:afterStarted', hideLoader, { once: true });
+            /* MutationObserver fallback: hide when Blazor injects real content into #app */
+            var app = document.getElementById('app');
+            if (app) {
+                var mo = new MutationObserver(function () {
+                    if (app.querySelector(':not(#ceybec-loader):not(style):not(script)')) {
+                        mo.disconnect();
+                        setTimeout(hideLoader, 120);
+                    }
+                });
+                mo.observe(app, { childList: true, subtree: true });
+            }
+            /* Safety net: hide after 8 s even if the event never fires */
+            setTimeout(hideLoader, 8000);
+        })();
+    </script>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+
+    <!-- Legacy JS (required by other pages) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- GSAP & Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <script>
+        lucide.createIcons();
+
+        window.initHomeAnimations = function () { window.initHomePage(); };
+
+        // ─── Matches the reference HTML's playInitialAnimations + initHeroSlider ───
+        window.initHomePage = function () {
+            lucide.createIcons();
+            if (typeof gsap === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            // ── 1. Hero Crossfade Slider (initHeroSlider) ────────────────
+            (function initHeroSlider() {
+                var slides = document.querySelectorAll('.hero-slide');
+                if (!slides.length) return;
+                var current = 0;
+                // Initial zoom on first slide image
+                var firstImg = slides[0].querySelector('.hero-slide-img');
+                if (firstImg) gsap.to(firstImg, { scale: 1.05, duration: 6, ease: 'none' });
+
+                setInterval(function () {
+                    var next = (current + 1) % slides.length;
+                    gsap.to(slides[current], { opacity: 0, duration: 1.5, zIndex: 1 });
+                    gsap.fromTo(slides[next],
+                        { opacity: 0, zIndex: 2 },
+                        { opacity: 1, duration: 1.5 }
+                    );
+                    var nextImg = slides[next].querySelector('.hero-slide-img');
+                    if (nextImg) gsap.fromTo(nextImg, { scale: 1 }, { scale: 1.05, duration: 6, ease: 'none' });
+                    current = next;
+                }, 5000);
+            })();
+
+            // ── 2. Anime.js Particles (#anime-container) ─────────────────
+            (function () {
+                var container = document.getElementById('anime-container');
+                if (!container || container.children.length > 0) return;
+                var count = window.innerWidth < 768 ? 15 : 40;
+                for (var i = 0; i < count; i++) {
+                    var dot = document.createElement('div');
+                    dot.style.position     = 'absolute';
+                    dot.style.borderRadius = '50%';
+                    dot.style.background   = 'rgba(255,255,255,0.15)';
+                    dot.style.border       = '1px solid rgba(255,255,255,0.3)';
+                    dot.style.backdropFilter = 'blur(2px)';
+                    var sz = (Math.random() * 6 + 2) + 'px';
+                    dot.style.width  = sz;
+                    dot.style.height = sz;
+                    dot.style.left   = (Math.random() * 100) + '%';
+                    dot.style.top    = (Math.random() * 100) + '%';
+                    dot.className    = 'particle';
+                    container.appendChild(dot);
+                }
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: '.particle',
+                        translateX: function () { return anime.random(-50, 50) + 'px'; },
+                        translateY: function () { return anime.random(-50, 50) + 'px'; },
+                        opacity: [
+                            { value: 0, duration: 0 },
+                            { value: function () { return anime.random(0.2, 0.8); }, duration: 2000 },
+                            { value: 0, duration: 2000, delay: function () { return anime.random(1000, 5000); } }
+                        ],
+                        easing: 'easeInOutSine',
+                        duration: function () { return anime.random(5000, 10000); },
+                        direction: 'alternate',
+                        loop: true
+                    });
+
+                    // Floating bento boxes
+                    anime({
+                        targets: '.float-anim',
+                        translateY: [-5, 5],
+                        direction: 'alternate',
+                        loop: true,
+                        duration: 3000,
+                        easing: 'easeInOutSine',
+                        delay: anime.stagger(200)
+                    });
+
+                    // Mouse parallax on particles
+                    document.addEventListener('mousemove', function (e) {
+                        var x = (window.innerWidth  - e.pageX * 2) / 90;
+                        var y = (window.innerHeight - e.pageY * 2) / 90;
+                        gsap.to('.particle', { x: x, y: y, duration: 1, ease: 'power1.out' });
+                    });
+                }
+            })();
+
+            // ── 3. Hero text entrance ─────────────────────────────────────
+            gsap.fromTo('.info-animate-hero',
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.1 }
+            );
+
+            // ── 4. Bento grid stagger ─────────────────────────────────────
+            gsap.fromTo('.info-stagger',
+                { y: 50, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'back.out(1.2)', clearProps: 'transform', delay: 0.3,
+                    onComplete: function () {
+                        document.querySelectorAll('.info-stagger').forEach(function (el) {
+                            el.classList.add('gsap-done');
+                        });
+                    }
+                }
+            );
+
+            // ── 5. Number Counters (matches reference: target >= 1000 => K) ──
+            document.querySelectorAll('.counter').forEach(function (el) {
+                var target       = parseInt(el.getAttribute('data-target'), 10);
+                var suffix       = target >= 1000 ? 'K' : '';
+                var displayTarget = target >= 1000 ? target / 1000 : target;
+                var obj = { val: 0 };
+                gsap.to(obj, {
+                    val: displayTarget,
+                    duration: 2.5,
+                    ease: 'power2.out',
+                    delay: 0.6,
+                    onUpdate: function () {
+                        var num = target >= 1000 ? obj.val.toFixed(1) : Math.floor(obj.val);
+                        el.innerText = num + suffix;
+                    }
+                });
+            });
+
+            // ── 6. Scroll-reveal sections ─────────────────────────────────
+            document.querySelectorAll('.scroll-reveal').forEach(function (section) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: 'top 85%',
+                    animation: gsap.fromTo(section,
+                        { y: 60, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+                    )
+                });
+            });
+        };
+
+        // NavMenu mobile toggle (called from Shared\NavMenu.razor Blazor component)
+        window.toggleMobileMenu = function (open) {
+            var menu = document.getElementById('mobile-menu-dropdown');
+            if (!menu) return;
+            if (open) {
+                menu.style.maxHeight = menu.scrollHeight + 'px';
+                menu.style.opacity = '1';
+            } else {
+                menu.style.maxHeight = '0';
+                menu.style.opacity = '0';
+            }
+        };
+
+        // Mobile menu pure-JS toggle (matches reference CSS .open class approach)
+        window.initMobileMenu = function () {
+            var btn  = document.getElementById('mobile-menu-btn');
+            var menu = document.getElementById('mobile-menu');
+            if (!btn || !menu) return;
+            btn.addEventListener('click', function () {
+                var isOpen = menu.classList.toggle('open');
+                btn.innerHTML = isOpen
+                    ? '<i data-lucide="x" class="w-6 h-6"></i>'
+                    : '<i data-lucide="menu" class="w-6 h-6"></i>';
+                lucide.createIcons();
+            });
+        };
+
+        // About page: counter animation + scroll-fade
+        window.initAboutPage = function () {
+            // Counter animation (reuse same pattern as home page)
+            var counters = document.querySelectorAll('.counter[data-target]');
+            counters.forEach(function (el) {
+                var target = parseInt(el.getAttribute('data-target'), 10);
+                var duration = 1800;
+                var start = null;
+                function step(ts) {
+                    if (!start) start = ts;
+                    var progress = Math.min((ts - start) / duration, 1);
+                    el.textContent = Math.floor(progress * target);
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target;
+                }
+                requestAnimationFrame(step);
+            });
+
+            // Scroll-fade for .about-fade elements
+            var fadeEls = document.querySelectorAll('.about-fade');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12 });
+                fadeEls.forEach(function (el) { io.observe(el); });
+            } else {
+                fadeEls.forEach(function (el) { el.classList.add('visible'); });
+            }
+        };
+
+        // Contact page: scroll-fade for .contact-fade elements
+        window.initContactPage = function () {
+            var fadeEls = document.querySelectorAll('.contact-fade');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.10 });
+                fadeEls.forEach(function (el) { io.observe(el); });
+            } else {
+                fadeEls.forEach(function (el) { el.classList.add('visible'); });
+            }
+        };
+
+        // Abroad page: scroll-fade for .abroad-fade elements
+        window.initAbroadPage = function () {
+            var fadeEls = document.querySelectorAll('.abroad-fade');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.10 });
+                fadeEls.forEach(function (el) { io.observe(el); });
+            } else {
+                fadeEls.forEach(function (el) { el.classList.add('visible'); });
+            }
+        };
+
+        // Activity page: scroll-fade for .act-fade elements
+        window.initActivityPage = function () {
+            var fadeEls = document.querySelectorAll('.act-fade');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.10 });
+                fadeEls.forEach(function (el) { io.observe(el); });
+            } else {
+                fadeEls.forEach(function (el) { el.classList.add('visible'); });
+            }
+        };
+
+        // Academics page: scroll-fade for .acad-fade elements
+        window.initAcademicsPage = function () {
+            var fadeEls = document.querySelectorAll('.acad-fade');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.08 });
+                fadeEls.forEach(function (el) { io.observe(el); });
+            } else {
+                fadeEls.forEach(function (el) { el.classList.add('visible'); });
+            }
+        };
+    </script>
+
+    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+
+    <!-- ═══ FLOATING HOME BUTTON – lives in <body> so position:fixed always works ═══ -->
+    <a id="fab-home-btn" href="/" title="Back to Home" aria-label="Back to Home" style="
+        display:none;
+        position:fixed;
+        bottom:2rem;
+        right:2rem;
+        z-index:99999;
+        width:3.5rem;
+        height:3.5rem;
+        border-radius:50%;
+        background:linear-gradient(135deg,#0077a8,#00b4d8);
+        color:white;
+        align-items:center;
+        justify-content:center;
+        text-decoration:none;
+        box-shadow:0 4px 20px rgba(0,180,216,0.5),0 2px 8px rgba(0,0,0,0.3);
+        transition:transform 0.25s cubic-bezier(.34,1.56,.64,1),box-shadow 0.25s ease;
+        cursor:pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+             fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5"/>
+        </svg>
+    </a>
+    <script>
+        (function () {
+            var btn = document.getElementById('fab-home-btn');
+            function updateFab() {
+                var path = window.location.pathname.replace(/\/$/, '');
+                /* hide only on the landing page "/" */
+                var isLanding = path === '';
+                btn.style.display = isLanding ? 'none' : 'flex';
+            }
+            updateFab();
+            var _pushState = history.pushState.bind(history);
+            history.pushState = function () {
+                _pushState.apply(history, arguments);
+                setTimeout(updateFab, 50);
+            };
+            window.addEventListener('popstate', function () { setTimeout(updateFab, 50); });
+            var poll = setInterval(function () { updateFab(); }, 300);
+            setTimeout(function () { clearInterval(poll); }, 5000);
+            btn.addEventListener('mouseover', function () {
+                this.style.transform = 'scale(1.13) translateY(-3px)';
+                this.style.boxShadow = '0 8px 28px rgba(0,180,216,0.65),0 4px 12px rgba(0,0,0,0.3)';
+            });
+            btn.addEventListener('mouseout', function () {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 4px 20px rgba(0,180,216,0.5),0 2px 8px rgba(0,0,0,0.3)';
+            });
+        })();
+    </script>
+</body>
+
+</html>

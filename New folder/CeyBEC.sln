@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11819.183 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeyBEC", "CeyBEC.csproj", "{CEDFA3C1-88F2-35E3-2EF7-6C1482B9DE1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEDFA3C1-88F2-35E3-2EF7-6C1482B9DE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDFA3C1-88F2-35E3-2EF7-6C1482B9DE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDFA3C1-88F2-35E3-2EF7-6C1482B9DE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDFA3C1-88F2-35E3-2EF7-6C1482B9DE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD284BB9-9E34-499B-BDE8-305EDDAD44B9}
+	EndGlobalSection
+EndGlobal

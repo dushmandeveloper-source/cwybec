@@ -1,0 +1,13 @@
+@inherits LayoutComponentBase
+
+@Body
+
+<StudentRegisterModal IsVisible="showModal" OnClose="CloseModal" />
+
+@code {
+    private bool showModal = false;
+
+    // Exposed so Landing.razor can trigger the modal via CascadingValue if needed
+    public void ShowModal() => showModal = true;
+    private void CloseModal() => showModal = false;
+}

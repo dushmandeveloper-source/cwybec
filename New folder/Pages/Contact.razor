@@ -1,0 +1,233 @@
+@page "/contact"
+@inject IJSRuntime JS
+
+<PageTitle>Contact Us - CeyBEC Campus</PageTitle>
+
+<main style="background:#f8fafc;display:block;">
+
+    <!-- ═══════ HERO BANNER ═══════ -->
+    <section style="position:relative;background:#002147;padding-top:4rem;padding-bottom:7rem;border-bottom-left-radius:3rem;border-bottom-right-radius:3rem;overflow:hidden;margin-top:0;">
+        <div style="position:absolute;inset:0;background:rgba(0,33,71,0.75);z-index:1;"></div>
+        <div style="position:absolute;inset:0;opacity:0.35;background:radial-gradient(circle at top right,#00b4d8,#002147,#002147);z-index:1;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,#002147 0%,rgba(0,33,71,0.2) 60%,transparent 100%);z-index:1;"></div>
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;z-index:0;" alt="" />
+
+        <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:0 2rem;text-align:center;">
+            <div class="contact-hero-in" style="margin-bottom:0.75rem;">
+                <span style="color:#00b4d8;font-weight:700;letter-spacing:0.22em;font-size:0.75rem;text-transform:uppercase;border-bottom:1px solid rgba(0,180,216,0.3);padding-bottom:0.4rem;display:inline-block;">
+                    Ceylon Bio-Engineering &amp; E-Commerce
+                </span>
+            </div>
+            <h1 class="contact-hero-in font-serif font-bold text-white" style="font-size:clamp(2.2rem,5vw,3.8rem);margin-bottom:1rem;line-height:1.2;">
+                <span style="background:linear-gradient(to right,#00b4d8,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Contact</span> Us
+            </h1>
+            <p class="contact-hero-in" style="color:#cbd5e1;font-size:clamp(0.95rem,1.8vw,1.1rem);max-width:40rem;margin:0 auto;">
+                We're here to help! Connect with us through any of these channels.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ CONTACT INFO CARDS ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:-4rem auto 4rem;padding:0 2rem;box-sizing:border-box;position:relative;z-index:20;">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="contact-info-grid">
+
+            <!-- Address -->
+            <div class="contact-fade" style="background:white;border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.07);border:1px solid #eef2f7;">
+                <div style="width:3rem;height:3rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                    <i data-lucide="map-pin" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:#002147;font-size:1rem;margin-bottom:0.85rem;">Our Campus</h3>
+                <p style="color:#64748b;font-size:0.9rem;line-height:1.8;margin:0;">
+                    879/A William Gopallawa Mawatha,<br />Kandy,<br />Sri Lanka
+                </p>
+            </div>
+
+            <!-- Phone -->
+            <div class="contact-fade" style="background:linear-gradient(135deg,#002147,#0a3060);border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,33,71,0.22);position:relative;overflow:hidden;">
+                <div style="position:absolute;right:-2rem;bottom:-2rem;width:10rem;height:10rem;background:rgba(0,180,216,0.08);border-radius:9999px;filter:blur(2rem);"></div>
+                <div style="width:3rem;height:3rem;background:rgba(255,255,255,0.12);border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;border:1px solid rgba(255,255,255,0.2);position:relative;z-index:1;">
+                    <i data-lucide="phone" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:white;font-size:1rem;margin-bottom:1rem;position:relative;z-index:1;">Call Us</h3>
+                <div style="display:flex;flex-direction:column;gap:0.65rem;position:relative;z-index:1;">
+                    <a href="tel:+94117433722" style="display:inline-block;background:white;color:#002147;font-weight:700;font-size:0.9rem;padding:0.55rem 1.25rem;border-radius:9999px;text-decoration:none;transition:background 0.2s;"
+                       onmouseover="this.style.background='#00b4d8';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#002147'">
+                        +94 117 433 722
+                    </a>
+                    <a href="tel:+94777682692" style="display:inline-block;background:white;color:#002147;font-weight:700;font-size:0.9rem;padding:0.55rem 1.25rem;border-radius:9999px;text-decoration:none;transition:background 0.2s;"
+                       onmouseover="this.style.background='#00b4d8';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#002147'">
+                        +94 777 682 692
+                    </a>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-fade" style="background:white;border-radius:2rem;padding:2.25rem;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,0.07);border:1px solid #eef2f7;">
+                <div style="width:3rem;height:3rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 6px 16px rgba(0,33,71,0.25);">
+                    <i data-lucide="mail" style="color:#00b4d8;width:1.3rem;height:1.3rem;"></i>
+                </div>
+                <h3 style="font-weight:700;color:#002147;font-size:1rem;margin-bottom:0.85rem;">Email Us</h3>
+                <a href="mailto:info@ceybec.lk"
+                   style="display:inline-block;background:#f0f9ff;color:#002147;font-weight:700;font-size:0.9rem;padding:0.55rem 1.5rem;border-radius:9999px;text-decoration:none;border:1px solid #bae6fd;transition:background 0.2s;"
+                   onmouseover="this.style.background='#002147';this.style.color='white'" onmouseout="this.style.background='#f0f9ff';this.style.color='#002147'">
+                    info@ceybec.lk
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════ FORM + MAP ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 6rem;padding:0 2rem;box-sizing:border-box;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="contact-main-grid">
+
+            <!-- Contact Form -->
+            <div class="contact-fade" style="background:white;border-radius:2rem;padding:clamp(1.75rem,4vw,3rem);box-shadow:0 20px 50px rgba(0,0,0,0.07);border:1px solid #eef2f7;">
+                <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.6rem;">Get In Touch</p>
+                <h2 class="font-serif font-bold" style="font-size:clamp(1.5rem,2.5vw,2rem);color:#002147;margin-bottom:2rem;line-height:1.2;">Send Us a Message</h2>
+
+                @if (submitted)
+                {
+                    <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:1rem;padding:1.25rem 1.5rem;color:#166534;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;">
+                        <i data-lucide="check-circle" style="width:1.25rem;height:1.25rem;color:#22c55e;flex-shrink:0;"></i>
+                        Thank you! Your message has been sent successfully.
+                    </div>
+                }
+
+                <EditForm Model="@contactForm" OnValidSubmit="HandleContact">
+                    <DataAnnotationsValidator />
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;" class="form-two-col">
+                        <div>
+                            <label style="display:block;font-size:0.82rem;font-weight:700;color:#002147;margin-bottom:0.4rem;">Full Name</label>
+                            <InputText @bind-Value="contactForm.Name" placeholder="Your full name"
+                                       style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.875rem;font-size:0.9rem;color:#002147;outline:none;box-sizing:border-box;background:#f8fafc;transition:border-color 0.2s;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='#e2e8f0'" />
+                            <ValidationMessage For="@(() => contactForm.Name)" />
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:0.82rem;font-weight:700;color:#002147;margin-bottom:0.4rem;">Email Address</label>
+                            <InputText @bind-Value="contactForm.Email" placeholder="example@domain.com"
+                                       style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.875rem;font-size:0.9rem;color:#002147;outline:none;box-sizing:border-box;background:#f8fafc;transition:border-color 0.2s;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='#e2e8f0'" />
+                            <ValidationMessage For="@(() => contactForm.Email)" />
+                        </div>
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label style="display:block;font-size:0.82rem;font-weight:700;color:#002147;margin-bottom:0.4rem;">Telephone Number</label>
+                        <InputText @bind-Value="contactForm.Phone" placeholder="+94 7XXXXXXXX"
+                                   style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.875rem;font-size:0.9rem;color:#002147;outline:none;box-sizing:border-box;background:#f8fafc;transition:border-color 0.2s;"
+                                   onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='#e2e8f0'" />
+                        <ValidationMessage For="@(() => contactForm.Phone)" />
+                    </div>
+                    <div style="margin-bottom:1.75rem;">
+                        <label style="display:block;font-size:0.82rem;font-weight:700;color:#002147;margin-bottom:0.4rem;">Description / Complaint</label>
+                        <InputTextArea @bind-Value="contactForm.Message" rows="5" placeholder="Enter your message here..."
+                                       style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.875rem;font-size:0.9rem;color:#002147;outline:none;box-sizing:border-box;background:#f8fafc;resize:vertical;transition:border-color 0.2s;"
+                                       onfocus="this.style.borderColor='#00b4d8'" onblur="this.style.borderColor='#e2e8f0'" />
+                        <ValidationMessage For="@(() => contactForm.Message)" />
+                    </div>
+                    <button type="submit"
+                            style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2.25rem;background:#002147;color:white;border:none;border-radius:9999px;font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 28px rgba(0,33,71,0.22);transition:background 0.2s,transform 0.2s;"
+                            onmouseover="this.style.background='#00b4d8';this.style.color='#002147';this.style.transform='translateY(-2px)'"
+                            onmouseout="this.style.background='#002147';this.style.color='white';this.style.transform='translateY(0)'">
+                        <i data-lucide="send" style="width:1rem;height:1rem;"></i>
+                        Send Message
+                    </button>
+                </EditForm>
+            </div>
+
+            <!-- Map -->
+            <div class="contact-fade" style="border-radius:2rem;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.10);border:1px solid #eef2f7;height:100%;min-height:480px;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d506589.15838767745!2d80.607762!3d7.271784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae368c11fd554a5%3A0xec2a478686718cf7!2s879%20William%20Gopallawa%20Mawatha%2C%20Kandy%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1743442234074!5m2!1sen!2sus"
+                    width="100%" height="100%"
+                    style="border:0;display:block;min-height:480px;"
+                    allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<style>
+    /* ── Hero entrance animations ────────────────────────────────────────── */
+    .contact-hero-in {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: contactFadeUp 0.7s ease forwards;
+    }
+    .contact-hero-in:nth-child(1) { animation-delay: 0.1s; }
+    .contact-hero-in:nth-child(2) { animation-delay: 0.25s; }
+    .contact-hero-in:nth-child(3) { animation-delay: 0.4s; }
+
+    @@keyframes contactFadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Scroll-fade ─────────────────────────────────────────────────────── */
+    .contact-fade {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .contact-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ── Info cards grid ─────────────────────────────────────────────────── */
+    .contact-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @@media (max-width: 900px) {
+        .contact-info-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .contact-main-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .form-two-col {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
+@code {
+    private ContactModel contactForm = new();
+    private bool submitted = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("lucide.createIcons");
+            await JS.InvokeVoidAsync("initContactPage");
+        }
+    }
+
+    private void HandleContact()
+    {
+        submitted = true;
+        contactForm = new ContactModel();
+    }
+
+    public class ContactModel
+    {
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter your name.")]
+        public string Name { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a valid email.")]
+        [System.ComponentModel.DataAnnotations.EmailAddress]
+        public string Email { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter your phone number.")]
+        public string Phone { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a message.")]
+        public string Message { get; set; } = "";
+    }
+}

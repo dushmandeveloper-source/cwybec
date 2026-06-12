@@ -1,0 +1,234 @@
+@page "/"
+@layout LandingLayout
+@inject IJSRuntime JS
+
+<PageTitle>CeyBEC Campus - Excellence in Higher Education</PageTitle>
+
+<!-- Page wrapper — full navy background so no white body shows on scroll -->
+<div style="display:flex;flex-direction:column;min-height:100vh;background:#f1f5f9;">
+
+<!-- Navigation -->
+<header id="navbar"
+        style="position:fixed;top:1.75rem;left:0;right:0;z-index:50;background:#002147;border-bottom:1px solid rgba(255,255,255,0.08);">
+
+    <!-- Top contact bar — visible on all screen sizes -->
+    <div class="flex justify-center md:justify-end items-center px-4 md:px-8 text-slate-300 font-medium"
+         style="background:#002147;border-bottom:1px solid rgba(255,255,255,0.08);position:fixed;top:0;left:0;right:0;z-index:51;height:1.75rem;">
+            <div class="flex gap-4 md:gap-6" style="font-size:0.68rem; color:white">
+                <span class="flex items-center gap-1" style="color:white">
+                <i data-lucide="mail" style="width:0.75rem;height:0.75rem;opacity:0.7;"></i>
+                info@ceybec.edu.lk
+            </span>
+            <span style="opacity:0.3;">|</span>
+                <span class="flex items-center gap-1" style="color:white">
+                    <i data-lucide="phone" style="width:0.75rem;height:0.75rem;opacity:0.7; color:white"></i>
+                +94 112 222 777
+            </span>
+        </div>
+    </div>
+
+    <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;">
+        <div class="flex justify-between items-center" style="height:4.5rem;">
+
+            <!-- Logo -->
+            <a href="/" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex-shrink:0;">
+                <img src="images/logo.png" alt="CeyBEC Campus"
+                     style="height:3rem;width:auto;object-fit:contain;"
+                     onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div style="display:none;align-items:center;gap:0.5rem;">
+                    <div style="width:2.25rem;height:2.25rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:0.5rem;display:flex;align-items:center;justify-content:center;">
+                        <i data-lucide="graduation-cap" style="color:white;width:1rem;height:1rem;"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight:800;color:white;font-size:1.05rem;line-height:1;letter-spacing:-0.01em;">CeyBEC</div>
+                        <div style="color:#94a3b8;font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;margin-top:2px;">C A M P U S</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center" style="gap:2rem;">
+                <a href="/" class="text-sm font-medium tracking-wide text-slate-200 hover:text-white" style="text-decoration:none;transition:color 0.2s;">
+                    <i data-lucide="home" style="width:1rem;height:1rem;"></i>
+                </a>
+                <a href="/about" class="text-sm font-medium tracking-wide text-slate-200 hover:text-white" style="text-decoration:none;transition:color 0.2s;">About Us</a>
+                <a href="/academics" class="text-sm font-medium tracking-wide text-slate-200 hover:text-white" style="text-decoration:none;transition:color 0.2s;">Academics</a>
+                <a href="/admissions" class="text-sm font-medium tracking-wide text-slate-200 hover:text-white" style="text-decoration:none;transition:color 0.2s;">Admissions</a>
+                <a href="/contact" class="text-sm font-medium tracking-wide text-slate-200 hover:text-white" style="text-decoration:none;transition:color 0.2s;">Contact</a>
+                <a href="/home" class="text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5"
+                   style="padding:0.5rem 1.25rem;background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#002147;border-radius:9999px;box-shadow:0 4px 14px rgba(56,189,248,0.35);text-decoration:none;font-weight:800;">
+                    Apply Now
+                </a>
+            </nav>
+
+            <!-- Mobile hamburger — modernised pill button -->
+            <button id="mobile-menu-btn"
+                    class="flex lg:hidden items-center justify-center focus:outline-none transition-all duration-200"
+                    aria-label="Toggle menu"
+                    style="width:2.5rem;height:2.5rem;border-radius:0.625rem;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.07);color:white;cursor:pointer;transition:background 0.2s,border-color 0.2s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.14)';this.style.borderColor='rgba(255,255,255,0.35)';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.07)';this.style.borderColor='rgba(255,255,255,0.18)';">
+                <i data-lucide="menu" style="width:1rem;height:1rem;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="lg:hidden"
+         style="max-height:0;overflow:hidden;opacity:0;background:#002147;border-top:1px solid rgba(255,255,255,0.1);position:absolute;width:100%;box-shadow:0 20px 40px rgba(0,0,0,0.3);transition:max-height 0.3s ease,opacity 0.3s ease;">
+        <div style="padding:0.5rem 1rem 1.5rem;display:flex;flex-direction:column;gap:0.25rem;">
+            <a href="/" class="block px-3 py-3 text-white rounded-md font-medium" style="text-decoration:none;">Home</a>
+            <a href="/about" class="block px-3 py-3 text-white rounded-md font-medium" style="text-decoration:none;">About Us</a>
+            <a href="/academics" class="block px-3 py-3 text-white rounded-md font-medium" style="text-decoration:none;">Academics</a>
+            <a href="/admissions" class="block px-3 py-3 text-white rounded-md font-medium" style="text-decoration:none;">Admissions</a>
+            <a href="/home" class="mt-2 block text-center py-3 rounded-full font-bold text-[#002147]"
+               style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);box-shadow:0 4px 14px rgba(56,189,248,0.3);text-decoration:none;">
+                Apply Now
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Main — navy background bridges hero to button card -->
+<main class="relative flex flex-col w-full" style="background:#0c3272;">
+
+    <!-- Hero Background & Text -->
+    <section class="relative flex items-center overflow-hidden"
+             style="min-height:80vh;padding-top:6.25rem;padding-bottom:8rem;background:#0c3272;">
+        <!-- Background -->
+        <div class="absolute inset-0" style="z-index:0;">
+            <div class="absolute inset-0" style="background:rgba(12,50,114,0.80);z-index:1;mix-blend-mode:multiply;"></div>
+            <div class="absolute inset-0" style="background:linear-gradient(to top,#0c3272 0%,transparent 50%,rgba(12,50,114,0.55) 100%);z-index:1;"></div>
+            <img src="images/bg_1.jpg" alt="CeyBEC Campus"
+                 class="hero-img" style="width:100%;height:100%;object-fit:cover;opacity:0.8;"
+                 onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop';" />
+        </div>
+
+        <!-- Particles -->
+        <div id="anime-container"></div>
+
+        <!-- Hero text -->
+        <div class="relative w-full text-center px-4" style="z-index:20;max-width:80rem;margin:0 auto;">
+
+            <div class="hero-elem flex justify-center mb-6">
+                <span class="inline-flex items-center gap-3 font-bold uppercase border-b pb-2"
+                      style="color:#38bdf8;border-color:rgba(56,189,248,0.3);font-size:0.65rem;letter-spacing:0.25em;">
+                    Welcome To
+                </span>
+            </div>
+
+            <h1 class="hero-elem font-serif font-bold mb-6 leading-tight"
+                id="main-headline"
+                style="font-size:clamp(2.5rem,8vw,5.5rem);color:#ffffff;">
+                CeyBEC Campus
+            </h1>
+
+            <div class="hero-elem mx-auto mb-8" style="max-width:48rem;">
+                <p class="font-light leading-relaxed"
+                   style="font-size:clamp(1rem,2.5vw,1.375rem);color:#ffffff;">
+                    The Education Partner in Sri Lanka.<br class="hidden md:block" />
+                    Shaping the next generation for the winning world through advanced Bio-Engineering &amp; E-Commerce.
+                </p>
+            </div>
+
+            <div class="hero-elem flex flex-wrap justify-center gap-4">
+                <a href="/academics"
+                   class="px-8 py-3.5 rounded font-bold tracking-wide text-sm transition-colors duration-300"
+                   style="background:#00b4d8;color:#002147;box-shadow:0 0 20px rgba(0,180,216,0.3);">
+                    VIEW PROGRAMS
+                </a>
+                <a href="https://www.youtube.com/watch?v=WHjH_B76Acg" target="_blank"
+                   class="px-8 py-3.5 rounded font-medium tracking-wide text-sm text-white flex items-center gap-2 transition-colors duration-300"
+                   style="border:2px solid rgba(255,255,255,0.3);backdrop-filter:blur(4px);">
+                    <i data-lucide="play-circle" class="w-5 h-5"></i> CAMPUS TOUR
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Button card section: light gray background, white card, split buttons -->
+    <div style="background:#f1f5f9;padding:0 1rem 4rem;margin-top:auto;">
+        <section class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+                 style="margin-top:-2.5rem;">
+            <!-- White card -->
+            <div style="background:white;border-radius:0.75rem;padding:0.5rem 1rem;box-shadow:0 20px 40px rgba(0,0,0,0.12);border:1px solid #e2e8f0;">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+
+                    <!-- LMS (Cyan/Teal) -->
+                        <a href="https://dushman-002-site2.mtempurl.com/Account/Login" target="_blank" class="academic-btn action-btn btn-lms relative flex items-center justify-between overflow-hidden rounded-xl p-4 border"
+                       style="height:4rem;border-color:rgba(255,255,255,0.15);text-decoration:none;">
+                        <div class="btn-glow"></div>
+                        <span class="btn-label">STUDENT LMS</span>
+                        <div class="btn-icon"><i data-lucide="user" class="w-5 h-5"></i></div>
+                    </a>
+
+                    <!-- Register (Purple) -->
+                        <a href="/login" class="academic-btn action-btn btn-reg relative flex items-center justify-between overflow-hidden rounded-xl p-4 border"
+                       style="height:4rem;border-color:rgba(255,255,255,0.15);text-decoration:none;">
+                        <div class="btn-glow"></div>
+                        <span class="btn-label">REGISTER ONLINE</span>
+                        <div class="btn-icon"><i data-lucide="pencil-line" class="w-5 h-5"></i></div>
+                    </a>
+
+                    <!-- Pay (Blue) -->
+                    <a href="https://mpg.seylan.lk/ceybec-campus" target="_blank"
+                       class="academic-btn action-btn btn-pay relative flex items-center justify-between overflow-hidden rounded-xl p-4 border"
+                       style="height:4rem;border-color:rgba(255,255,255,0.15);text-decoration:none;">
+                        <div class="btn-glow"></div>
+                        <span class="btn-label">PAY ONLINE</span>
+                        <div class="btn-icon"><i data-lucide="credit-card" class="w-5 h-5"></i></div>
+                    </a>
+
+                    <!-- More Information (Amber) -->
+                    <a href="/home" class="academic-btn action-btn btn-info relative flex items-center justify-between overflow-hidden rounded-xl p-4 border"
+                       style="height:4rem;border-color:rgba(255,255,255,0.15);text-decoration:none;">
+                        <div class="btn-glow"></div>
+                        <span class="btn-label">MORE INFORMATION</span>
+                        <div class="btn-icon"><i data-lucide="external-link" class="w-5 h-5"></i></div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+</main>
+
+<!-- Footer: dark slate, cyan top border -->
+<footer class="py-8 text-slate-400 mt-auto" style="background:#0f172a;border-top:4px solid #00b4d8;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <img src="images/logo.png" alt="CeyBEC Campus"
+                     style="height:2.5rem;width:auto;display:block;margin:0 auto 0.5rem;opacity:0.5;filter:grayscale(1);transition:all 0.3s;"
+                     onmouseover="this.style.opacity='1';this.style.filter='grayscale(0)';"
+                     onmouseout="this.style.opacity='0.5';this.style.filter='grayscale(1)';"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <span style="display:none;color:white;font-weight:700;font-size:0.9rem;">CeyBEC Campus</span>
+                <p class="text-xs">© @DateTime.Now.Year CeyBEC Campus. All Rights Reserved.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs font-medium">
+                <a href="/" class="hover:text-white transition-colors">Home</a>
+                <a href="/contact" class="hover:text-white transition-colors">Contact</a>
+                <a href="#" class="hover:text-white transition-colors">SIC</a>
+                <a href="#" class="hover:text-white transition-colors">Register</a>
+                <a href="#" class="hover:text-white transition-colors">Scholarship</a>
+                <a href="#" class="hover:text-white transition-colors">Lecturer</a>
+                <a href="#" class="hover:text-white transition-colors">Verification</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</div><!-- end page wrapper -->
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("initMobileMenu");
+            await JS.InvokeVoidAsync("initHomeAnimations");
+        }
+    }
+}

@@ -1,0 +1,419 @@
+﻿@page "/home"
+@inject IJSRuntime JS
+
+<PageTitle>CeyBEC Campus - Excellence in Higher Education</PageTitle>
+
+<main class="flex-col w-full" style="background:#f8fafc;display:block;margin-top:0;padding-top:0;">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section id="hero" class="relative w-full bg-brand-navy z-0 shadow-2xl"
+             style="padding-top:5rem;padding-bottom:8rem;border-bottom-left-radius:3rem;border-bottom-right-radius:3rem;margin-top:0;overflow:hidden;">
+
+        <!-- Background layers + slider -->
+        <div class="absolute inset-0" style="z-index:0;">
+            <div class="absolute inset-0" style="background:rgba(0,33,71,0.70);mix-blend-mode:multiply;z-index:10;"></div>
+            <div class="absolute inset-0" style="opacity:0.4;background:radial-gradient(circle at top right,#00b4d8,#002147,#002147);z-index:10;"></div>
+            <div class="absolute inset-0" style="background:linear-gradient(to top,#002147 0%,rgba(0,33,71,0.30) 50%,transparent 100%);z-index:10;"></div>
+
+            <div class="hero-slide" style="position:absolute;inset:0;opacity:1;z-index:2;">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+                     class="w-full h-full object-cover hero-slide-img" style="mix-blend-mode:luminosity;" />
+            </div>
+            <div class="hero-slide" style="position:absolute;inset:0;opacity:0;z-index:1;">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
+                     class="w-full h-full object-cover hero-slide-img" style="mix-blend-mode:luminosity;" />
+            </div>
+        </div>
+
+        <!-- Anime.js Particles -->
+        <div id="anime-container" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:10;"></div>
+
+        <!-- Hero Content -->
+        <div class="relative flex flex-col items-center text-center px-4" style="z-index:20;max-width:1400px;margin:0 auto;width:100%;">
+            <div class="info-animate-hero" style="margin-bottom:1rem;">
+                <span style="color:#00b4d8;font-weight:700;letter-spacing:0.25em;font-size:0.8rem;text-transform:uppercase;border-bottom:1px solid rgba(0,180,216,0.3);padding-bottom:0.5rem;display:inline-block;">
+                    Ceylon Bio-Engineering &amp; E-Commerce
+                </span>
+            </div>
+            <h2 class="info-animate-hero font-serif font-bold text-white leading-tight"
+                style="font-size:clamp(2.2rem,5.5vw,4rem);margin-bottom:1rem;max-width:55rem;">
+                Where Innovation <br />
+                <span style="background:linear-gradient(to right,#00b4d8,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                    Meets Academic Excellence.
+                </span>
+            </h2>
+            <p class="info-animate-hero font-light leading-relaxed"
+               style="color:#cbd5e1;font-size:clamp(0.9rem,1.6vw,1.05rem);max-width:46rem;margin-bottom:1.75rem;">
+                A transformative educational paradigm bridging modern technology and global commerce,
+                proudly supported by academic boards in New Zealand, the UK, and Japan.
+            </p>
+            <div class="info-animate-hero" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+                <a href="#academics"
+                   class="font-bold transition-all duration-300"
+                   style="display:inline-block;padding:1rem 2.5rem;background:#00b4d8;color:#002147;border-radius:9999px;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;box-shadow:0 0 20px rgba(0,180,216,0.35);text-decoration:none;"
+                   onmouseover="this.style.background='white';this.style.transform='translateY(-3px)'"
+                   onmouseout="this.style.background='#00b4d8';this.style.transform='translateY(0)'">
+                    EXPLORE COURSES
+                </a>
+                <a href="/login"
+                   class="font-bold transition-all duration-300"
+                   style="display:inline-block;padding:1rem 2.5rem;background:linear-gradient(135deg,#22c55e,#16a34a);color:white;border-radius:9999px;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;box-shadow:0 0 20px rgba(34,197,94,0.35);text-decoration:none;"
+                   onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(34,197,94,0.5)'"
+                   onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 20px rgba(34,197,94,0.35)'">
+                    REGISTER ONLINE
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ BENTO GRID ═══════ -->
+    <section id="about" class="relative" style="position:relative;z-index:20;max-width:1400px;width:100%;margin:-4rem auto 6rem;padding:0 2rem;box-sizing:border-box;">
+        <div class="bento-grid">
+
+            <!-- Mission -->
+            <div class="info-stagger float-anim bento-mission"
+                 style="background:#ffffff;padding:2rem 2.5rem;border-radius:2rem;box-shadow:0 25px 60px rgba(0,0,0,0.10);border:1px solid #f1f5f9;min-height:220px;display:flex;flex-direction:column;justify-content:flex-start;">
+                <div style="width:3.25rem;height:3.25rem;background:#002147;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.75rem;box-shadow:0 8px 20px rgba(0,33,71,0.30);">
+                    <i data-lucide="target" style="color:#00b4d8;width:1.6rem;height:1.6rem;"></i>
+                </div>
+                <h3 class="font-serif font-bold" style="font-size:clamp(1.5rem,2.5vw,2rem);color:#002147;margin-bottom:1rem;line-height:1.2;">Our Mission</h3>
+                <p style="color:#64748b;font-size:1rem;line-height:1.7;font-weight:400;">
+                    Providing cutting-edge education with industry partnerships to equip students with skills bridging technology and commerce.
+                </p>
+            </div>
+
+            <!-- Vision -->
+            <div class="info-stagger float-anim bento-vision"
+                 style="background:linear-gradient(135deg,#00b4d8 0%,#0ea5e9 30%,#1d4ed8 100%);padding:2rem 2.25rem;border-radius:2rem;box-shadow:0 25px 50px rgba(0,100,200,0.30);border:none;min-height:220px;color:white;display:flex;flex-direction:column;justify-content:flex-start;">
+                <div style="width:3.25rem;height:3.25rem;background:rgba(255,255,255,0.22);border-radius:9999px;display:flex;align-items:center;justify-content:center;margin-bottom:1.75rem;border:1px solid rgba(255,255,255,0.25);">
+                    <i data-lucide="eye" style="color:white;width:1.6rem;height:1.6rem;"></i>
+                </div>
+                <h3 class="font-serif font-bold" style="font-size:clamp(1.4rem,2.2vw,1.85rem);margin-bottom:1rem;line-height:1.2;color:white;">Our Vision</h3>
+                <p style="font-size:1rem;line-height:1.7;font-weight:600;color:rgba(255,255,255,0.95);">
+                    Leading innovative education to empower future leaders in bio-engineering and e-commerce.
+                </p>
+            </div>
+
+            <!-- Stat 1 -->
+            <div class="info-stagger float-anim bento-stat"
+                 style="background:white;padding:2.5rem 2rem;border-radius:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);border:1px solid #f1f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+                <div class="font-black" style="font-size:2.75rem;color:#002147;letter-spacing:-0.04em;line-height:1;margin-bottom:0.6rem;">
+                    <span class="counter" data-target="2000">0</span>+
+                </div>
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;">Current Enrollments</div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="info-stagger float-anim bento-stat"
+                 style="background:white;padding:2.5rem 2rem;border-radius:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);border:1px solid #f1f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+                <div class="font-black" style="font-size:2.75rem;color:#002147;letter-spacing:-0.04em;line-height:1;margin-bottom:0.6rem;">
+                    <span class="counter" data-target="38">0</span>+
+                </div>
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;">Qualified Staff</div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="info-stagger float-anim bento-stat"
+                 style="background:white;padding:2.5rem 2rem;border-radius:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.07);border:1px solid #f1f5f9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+                <div class="font-black" style="font-size:2.75rem;color:#002147;letter-spacing:-0.04em;line-height:1;margin-bottom:0.6rem;">
+                    <span class="counter" data-target="60">0</span>+
+                </div>
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;">Clubs &amp; Activities</div>
+            </div>
+
+            <!-- Stat 4 (dark) -->
+            <div class="info-stagger float-anim bento-stat-dark"
+                 style="background:#002147;padding:2.5rem 2rem;border-radius:1.5rem;box-shadow:0 10px 30px rgba(0,33,71,0.30);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:130px;">
+                <div class="font-black" style="font-size:2.75rem;color:#00b4d8;letter-spacing:-0.04em;line-height:1;margin-bottom:0.6rem;">
+                    <span class="counter" data-target="870">0</span>+
+                </div>
+                <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;">Uni Partners</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ WHY CHOOSE + SERVICES ═══════ -->
+    <section id="services" class="scroll-reveal" style="max-width:1400px;width:100%;margin:0 auto 6rem;padding:0 2rem;box-sizing:border-box;">
+        <div class="relative overflow-hidden bg-white"
+             style="border-radius:2.5rem;padding:clamp(2rem,5vw,4rem) clamp(1.5rem,5vw,4.5rem);border:1px solid #eef2f7;box-shadow:0 20px 60px rgba(0,0,0,0.06);">
+
+            <!-- Decorative blob top-right -->
+            <div style="position:absolute;right:-4rem;top:-4rem;width:18rem;height:18rem;background:rgba(0,180,216,0.07);border-radius:9999px;filter:blur(3rem);pointer-events:none;z-index:0;"></div>
+
+            <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;" class="why-grid">
+
+                <!-- Left: copy -->
+                <div>
+                    <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:1rem;">Why Choose Us</p>
+                    <h2 class="font-serif font-bold" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#002147;line-height:1.2;margin-bottom:1.5rem;">
+                        Why Choose CeyBEC Campus?
+                    </h2>
+                    <p style="color:#64748b;font-size:1rem;line-height:1.8;margin-bottom:2.25rem;">
+                        CeyBEC Campus provides foundation courses that cater to students without A/L qualifications,
+                        offering a unique opportunity to pursue higher education both locally and internationally.
+                        Our programs are endorsed by a foreign trustee board, ensuring high-quality education and
+                        seamless transitions to universities in New Zealand, Canada, the UK, Japan, and Singapore.
+                    </p>
+                    <a href="/academics"
+                       class="inline-block font-bold tracking-widest text-sm uppercase transition-all duration-300"
+                       style="padding:1rem 2.25rem;background:#002147;color:white;border-radius:9999px;box-shadow:0 10px 30px rgba(0,33,71,0.22);text-decoration:none;"
+                       onmouseover="this.style.background='#00b4d8';this.style.color='#002147';this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.background='#002147';this.style.color='white';this.style.transform='translateY(0)'">
+                        View Our Courses
+                    </a>
+                </div>
+
+                <!-- Right: services list -->
+                <div>
+                    <h3 class="font-serif font-bold" style="font-size:1.5rem;color:#002147;margin-bottom:1.5rem;">Our Services</h3>
+                    <div style="display:flex;flex-direction:column;">
+                        @foreach (var svc in _services)
+                        {
+                            <div class="svc-row group"
+                                 style="display:flex;align-items:center;gap:1.25rem;padding:1rem 0;border-bottom:1px solid #f1f5f9;cursor:default;transition:padding-left 0.2s;">
+                                <div style="width:2.75rem;height:2.75rem;background:#f0f9ff;border-radius:0.875rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;">
+                                    <i data-lucide="@svc.LucideIcon" style="width:1.15rem;height:1.15rem;color:#00b4d8;"></i>
+                                </div>
+                                <span style="font-weight:700;color:#002147;font-size:0.95rem;">@svc.Label</span>
+                                <i data-lucide="chevron-right" style="width:1rem;height:1rem;color:#cbd5e1;margin-left:auto;"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ COURSES ═══════ -->
+    <section id="academics" class="scroll-reveal" style="max-width:1400px;width:100%;margin:0 auto 6rem;padding:0 2rem;box-sizing:border-box;">
+        <div class="text-center" style="margin-bottom:4rem;">
+            <h2 class="font-serif font-bold mb-4" style="font-size:clamp(2rem,4vw,3rem);color:#002147;">Our Premium Courses</h2>
+            <p class="font-medium mx-auto" style="color:#64748b;font-size:1.1rem;max-width:36rem;">
+                World-class curriculum designed to elevate your career and expand your horizons globally.
+            </p>
+        </div>
+
+        <div class="courses-grid">
+            @foreach (var c in _courses)
+            {
+                <div class="course-card group relative overflow-hidden cursor-pointer"
+                     style="height:400px;border-radius:1.25rem;box-shadow:0 20px 40px rgba(0,0,0,0.12);border:1px solid #f1f5f9;">
+                    <img src="@c.Url" alt="@c.Title"
+                         class="course-img absolute inset-0 w-full h-full object-cover"
+                         onerror="this.src='images/@c.Fallback';" />
+                    <div class="absolute inset-0" style="background:linear-gradient(to top,#002147 0%,rgba(0,33,71,0.6) 50%,transparent 100%);opacity:0.9;"></div>
+                    <div class="absolute inset-0 p-7 flex flex-col justify-end">
+                        <h3 class="font-serif font-bold text-white leading-tight" style="font-size:1.35rem;margin-bottom:0.5rem;">
+                            @c.Title
+                            <span class="block font-sans font-light mt-1" style="font-size:0.8rem;color:#00b4d8;min-height:1.2em;">
+                                @(string.IsNullOrEmpty(c.Badge) ? "\u00a0" : c.Badge)
+                            </span>
+                        </h3>
+                        <div class="course-content">
+                            <p class="text-sm leading-relaxed mb-4" style="color:#cbd5e1;">@c.Desc</p>
+                            <span class="font-bold uppercase tracking-widest flex items-center gap-2" style="color:#00b4d8;font-size:0.72rem;">
+                                Enroll Now <i data-lucide="arrow-right" style="width:0.75rem;height:0.75rem;"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+</main>
+
+<style>
+    /* ── Why Choose grid – mobile stack ────────────────────────────────────── */
+    .why-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    @@media (max-width: 900px) {
+        .why-grid {
+            grid-template-columns: 1fr !important;
+            gap: 2.5rem !important;
+        }
+    }
+
+    /* ── Service row hover indent ───────────────────────────────────────────── */
+    .svc-row:hover {
+        padding-left: 0.5rem;
+    }
+    .svc-row:hover div {
+        background: #e0f5fb !important;
+    }
+    .svc-row:last-child {
+        border-bottom: none !important;
+    }
+
+    /* ── Hero mobile height fix ─────────────────────────────────────────────── */
+    @@media (max-width: 768px) {
+        #hero {
+            padding-top: 3.5rem !important;
+            padding-bottom: 4.5rem !important;
+            border-radius: 0 0 2rem 2rem !important;
+        }
+        #about {
+            margin-top: -4rem !important;
+        }
+    }
+
+    /* ── Bootstrap isolation ───────────────────────────────────────────────── */
+    /* Reset Bootstrap interference on the home page main wrapper and all
+       direct layout primitives so Tailwind CSS wins everywhere below. */
+    main.flex-col,
+    main.flex-col *,
+    main.flex-col *::before,
+    main.flex-col *::after {
+        box-sizing: border-box;
+    }
+
+    /* Remove any Bootstrap/browser top margin that creates the gap under the nav */
+    main.flex-col {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    main.flex-col #hero {
+        margin-top: 0 !important;
+    }
+
+    /* Neutralise Bootstrap container / row / col overrides */
+    main.flex-col .container,
+    main.flex-col .container-fluid,
+    main.flex-col .row,
+    main.flex-col [class*="col-"] {
+        all: unset;
+        box-sizing: border-box;
+    }
+
+    /* Force serif headings (Playfair Display) and sans body (Outfit) */
+    main.flex-col h1,
+    main.flex-col h2,
+    main.flex-col h3,
+    main.flex-col h4,
+    main.flex-col h5,
+    main.flex-col h6 {
+        font-family: 'Playfair Display', serif !important;
+        margin: 0;
+        padding: 0;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    main.flex-col p,
+    main.flex-col span,
+    main.flex-col a,
+    main.flex-col button,
+    main.flex-col li {
+        font-family: 'Outfit', sans-serif !important;
+    }
+
+    /* Ensure backdrop-filter works regardless of Bootstrap stacking-context resets */
+    main.flex-col [style*="backdrop-filter"],
+    main.flex-col .backdrop-blur-xl,
+    main.flex-col .backdrop-blur-2xl {
+        -webkit-backdrop-filter: blur(24px) !important;
+        backdrop-filter: blur(24px) !important;
+    }
+
+    /* ── Hero slider ────────────────────────────────────────────────────────── */
+    .hero-slide { transition: opacity 1.5s ease-in-out; }
+
+    /* ── Course card hover ──────────────────────────────────────────────────── */
+    .course-card .course-img  { transition: transform 0.8s cubic-bezier(0.25,1,0.5,1); }
+    .course-card:hover .course-img  { transform: scale(1.1); }
+    .course-content { transform: translateY(20px); opacity:0; transition: all 0.4s ease; }
+    .course-card:hover .course-content { transform: translateY(0); opacity:1; }
+
+    /* ── Float animation base ───────────────────────────────────────────────── */
+    .float-anim { transform: translateY(0); }
+
+    /* ── Bento & stagger cards — fallback visible state after GSAP finishes ── */
+    /* clearProps:'transform' is used in GSAP so opacity inline style persists;
+       this rule handles the edge case where AOS/animate.css resets opacity. */
+    .info-stagger.gsap-done {
+        opacity: 1 !important;
+    }
+
+    /* ── Bento grid – ensure negative-margin overlap above hero ────────────── */
+    #about {
+        position: relative;
+        z-index: 20;
+    }
+
+    /* ── Glassmorphism cards – reinforce against Bootstrap opacity overrides ── */
+    .bento-mission,
+    .bento-vision {
+        will-change: transform;
+    }
+
+    /* ── Bento grid layout ──────────────────────────────────────────────────── */
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.5rem;
+    }
+
+    .bento-mission { grid-column: span 8; }
+    .bento-vision  { grid-column: span 4; }
+    .bento-stat,
+    .bento-stat-dark { grid-column: span 3; }
+
+    @@media (max-width: 1024px) {
+        .bento-mission { grid-column: span 12; }
+        .bento-vision  { grid-column: span 12; }
+        .bento-stat,
+        .bento-stat-dark { grid-column: span 6; }
+    }
+
+    @@media (max-width: 640px) {
+        .bento-stat,
+        .bento-stat-dark { grid-column: span 12; }
+    }
+
+    /* ── Courses grid ───────────────────────────────────────────────────────── */
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+</style>
+
+@code {
+    [CascadingParameter] private Action? TriggerRegisterModal { get; set; }
+
+    private record Svc(string LucideIcon, string Label);
+    private record Course(string Url, string Fallback, string Title, string Desc, string Badge = "");
+
+    private List<Svc> _services = new()
+    {
+        new("book-open",  "Academic & Vocational Studies"),
+        new("plane",      "Study Abroad"),
+        new("lightbulb",  "Entrepreneurship Consultation"),
+        new("briefcase",  "Local Job Placements"),
+        new("stamp",      "Foreign Job Visa Consultation"),
+    };
+
+    private List<Course> _courses = new()
+    {
+        new("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop","c1.png","Psychosocial Assistant","Gain practical skills to support individuals facing mental, emotional, and social challenges, working alongside healthcare professionals.","(NVQ)"),
+        new("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=800&auto=format&fit=crop","c2.png","Pharmacy Technician","Train to assist pharmacists in dispensing medications, managing prescriptions, and supporting patient care."),
+        new("https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop","c3.png","Caregiver","Develop essential caregiving skills to provide compassionate support to individuals needing personal and medical care.","(NVQ)"),
+        new("https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop","c4.png","Psychology & Counselling","Advance your understanding of psychology and counseling to support mental health and emotional well-being."),
+        new("https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop","c5.png","AAT Stages: 1/2/3","Build a strong foundation in accounting principles, preparing for entry-level roles in financial management and bookkeeping."),
+        new("https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop","c6.png","Civil Engineering","Acquire technical knowledge to design, construct, and maintain infrastructure projects essential for urban development."),
+        new("https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop","c7.png","IELTS Preparation","Prepare for the IELTS exam by improving your language skills and test-taking strategies to achieve your desired band score."),
+        new("https://images.unsplash.com/photo-1528164344705-47542687000d?q=80&w=800&auto=format&fit=crop","c8.png","JLPT Preparation","Master Japanese language skills and prepare for JLPT certification to unlock exciting international career opportunities."),
+    };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("lucide.createIcons");
+            await JS.InvokeVoidAsync("initHomePage");
+        }
+    }
+}

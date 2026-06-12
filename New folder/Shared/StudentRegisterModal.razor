@@ -1,0 +1,146 @@
+@if (IsVisible)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" style="background:rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <EditForm Model="@model" OnValidSubmit="HandleSubmit">
+                    <DataAnnotationsValidator />
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Student Registration Form</h5>
+                        <button type="button" class="close text-white" @onclick="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if (!string.IsNullOrEmpty(successMessage))
+                        {
+                            <div class="alert alert-success">@successMessage</div>
+                        }
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Full Name</label>
+                                <InputText class="form-control" @bind-Value="model.FullName" placeholder="Enter your full name" />
+                                <ValidationMessage For="@(() => model.FullName)" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Email</label>
+                                <InputText class="form-control" @bind-Value="model.Email" placeholder="Enter your email" />
+                                <ValidationMessage For="@(() => model.Email)" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Phone Number</label>
+                                <InputText class="form-control" @bind-Value="model.Phone" placeholder="07XXXXXXXX" />
+                                <ValidationMessage For="@(() => model.Phone)" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>NIC / Passport</label>
+                                <InputText class="form-control" @bind-Value="model.NIC" placeholder="Enter NIC or Passport No" />
+                                <ValidationMessage For="@(() => model.NIC)" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <InputTextArea class="form-control" rows="2" @bind-Value="model.Address" placeholder="Enter your address" />
+                            <ValidationMessage For="@(() => model.Address)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Select Course</label>
+                            <InputSelect class="form-control" @bind-Value="model.Course">
+                                <option value="">Choose...</option>
+                                <option>Psychosocial Assistant (NVQ)</option>
+                                <option>Pharmacy Technician</option>
+                                <option>Caregiver (NVQ)</option>
+                                <option>Psychology &amp; Counselling</option>
+                                <option>AAT Stages: 1/2/3</option>
+                                <option>Civil Engineering</option>
+                                <option>IELTS Preparation</option>
+                                <option>JLPT Preparation</option>
+                            </InputSelect>
+                            <ValidationMessage For="@(() => model.Course)" />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Password</label>
+                                <InputText type="password" class="form-control" @bind-Value="model.Password" placeholder="Enter password" />
+                                <ValidationMessage For="@(() => model.Password)" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Confirm Password</label>
+                                <InputText type="password" class="form-control" @bind-Value="model.ConfirmPassword" placeholder="Confirm password" />
+                                <ValidationMessage For="@(() => model.ConfirmPassword)" />
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(passwordError))
+                        {
+                            <div class="alert alert-danger">@passwordError</div>
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @onclick="Close">Cancel</button>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private RegisterModel model = new();
+    private string passwordError = "";
+    private string successMessage = "";
+
+    private async Task HandleSubmit()
+    {
+        if (model.Password != model.ConfirmPassword)
+        {
+            passwordError = "Passwords do not match.";
+            return;
+        }
+        passwordError = "";
+        successMessage = "Registration successful! Welcome to CeyBEC Campus.";
+        model = new RegisterModel();
+    }
+
+    private async Task Close()
+    {
+        successMessage = "";
+        passwordError = "";
+        await OnClose.InvokeAsync();
+    }
+
+    public class RegisterModel
+    {
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter your full name.")]
+        public string FullName { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a valid email.")]
+        [System.ComponentModel.DataAnnotations.EmailAddress]
+        public string Email { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a valid phone number.")]
+        [System.ComponentModel.DataAnnotations.RegularExpression(@"[0-9]{10}", ErrorMessage = "Must be 10 digits.")]
+        public string Phone { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter your NIC or Passport.")]
+        public string NIC { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter your address.")]
+        public string Address { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please select a course.")]
+        public string Course { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Password must be at least 6 characters.")]
+        [System.ComponentModel.DataAnnotations.MinLength(6)]
+        public string Password { get; set; } = "";
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please confirm your password.")]
+        public string ConfirmPassword { get; set; } = "";
+    }
+}

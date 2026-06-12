@@ -1,0 +1,192 @@
+@page "/academics"
+@inject IJSRuntime JS
+
+<PageTitle>Academics - CeyBEC Campus</PageTitle>
+
+<main style="background:#f8fafc;display:block;">
+
+    <!-- ═══════ HERO BANNER ═══════ -->
+    <section style="position:relative;background:#002147;padding-top:4rem;padding-bottom:7rem;border-bottom-left-radius:3rem;border-bottom-right-radius:3rem;overflow:hidden;margin-top:0;">
+        <div style="position:absolute;inset:0;background:rgba(0,33,71,0.72);z-index:1;"></div>
+        <div style="position:absolute;inset:0;opacity:0.35;background:radial-gradient(circle at top right,#00b4d8,#002147,#002147);z-index:1;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,#002147 0%,rgba(0,33,71,0.2) 60%,transparent 100%);z-index:1;"></div>
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;z-index:0;" alt="" />
+
+        <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:0 2rem;text-align:center;">
+            <div class="acad-hero-in" style="margin-bottom:0.75rem;">
+                <span style="color:#00b4d8;font-weight:700;letter-spacing:0.22em;font-size:0.75rem;text-transform:uppercase;border-bottom:1px solid rgba(0,180,216,0.3);padding-bottom:0.4rem;display:inline-block;">
+                    Ceylon Bio-Engineering &amp; E-Commerce
+                </span>
+            </div>
+            <h1 class="acad-hero-in font-serif font-bold text-white" style="font-size:clamp(2.2rem,5vw,3.8rem);margin-bottom:1rem;line-height:1.2;">
+                Our <span style="background:linear-gradient(to right,#00b4d8,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Academic</span> Programmes
+            </h1>
+            <p class="acad-hero-in" style="color:#cbd5e1;font-size:clamp(0.95rem,1.8vw,1.1rem);max-width:44rem;margin:0 auto 1.75rem;">
+                Explore industry-aligned courses designed to launch and elevate your career — from healthcare to technology to global languages.
+            </p>
+            <!-- Stats row -->
+            <div class="acad-hero-in" style="display:inline-flex;gap:2.5rem;background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);border-radius:9999px;padding:0.85rem 2.5rem;flex-wrap:wrap;justify-content:center;">
+                <div style="text-align:center;">
+                    <div style="font-size:1.4rem;font-weight:800;color:#00b4d8;">8+</div>
+                    <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.12em;">Programmes</div>
+                </div>
+                <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+                <div style="text-align:center;">
+                    <div style="font-size:1.4rem;font-weight:800;color:#00b4d8;">NVQ</div>
+                    <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.12em;">Certified</div>
+                </div>
+                <div style="width:1px;background:rgba(255,255,255,0.2);"></div>
+                <div style="text-align:center;">
+                    <div style="font-size:1.4rem;font-weight:800;color:#00b4d8;">Online</div>
+                    <div style="font-size:0.68rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.12em;">&amp; In-Person</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ COURSES GRID ═══════ -->
+    <section style="max-width:1400px;width:100%;margin:0 auto 6rem;padding:4rem 2rem 0;box-sizing:border-box;">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem;" class="acad-grid">
+            @foreach (var course in courses)
+            {
+                <div class="acad-fade acad-card" style="background:white;border-radius:1.75rem;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.07);border:1px solid #eef2f7;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;"
+                     onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 24px 50px rgba(0,33,71,0.14)'"
+                     onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.07)'">
+
+                    <!-- Image -->
+                    <div style="position:relative;height:200px;overflow:hidden;">
+                        <img src="images/@course.Image" alt="@course.Title"
+                             style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,33,71,0.7) 0%,transparent 55%);"></div>
+                        <!-- Category badge -->
+                        <div style="position:absolute;top:1rem;left:1rem;background:rgba(0,33,71,0.82);backdrop-filter:blur(4px);border:1px solid rgba(0,180,216,0.4);color:#00b4d8;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:9999px;">
+                            @course.Category
+                        </div>
+                        <!-- Duration pill bottom -->
+                        <div style="position:absolute;bottom:0.75rem;left:1rem;right:1rem;display:flex;align-items:center;gap:0.4rem;">
+                            <i data-lucide="clock" style="color:#00b4d8;width:0.85rem;height:0.85rem;flex-shrink:0;"></i>
+                            <span style="color:white;font-size:0.75rem;font-weight:700;">@course.Duration</span>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div style="padding:1.5rem;display:flex;flex-direction:column;flex:1;">
+                        <h3 class="font-serif font-bold" style="font-size:1rem;color:#002147;margin-bottom:0.5rem;line-height:1.35;">@course.Title</h3>
+                        <div style="width:2.5rem;height:2px;background:#00b4d8;border-radius:9999px;margin-bottom:1rem;"></div>
+
+                        <!-- Highlights -->
+                        <ul style="list-style:none;padding:0;margin:0 0 1.25rem;display:flex;flex-direction:column;gap:0.4rem;flex:1;">
+                            @foreach (var h in course.Highlights)
+                            {
+                                <li style="display:flex;align-items:flex-start;gap:0.5rem;font-size:0.82rem;color:#475569;line-height:1.5;">
+                                    <span style="color:#00b4d8;font-weight:700;flex-shrink:0;margin-top:1px;">›</span>
+                                    @h
+                                </li>
+                            }
+                        </ul>
+
+                        <!-- Entry requirement -->
+                        <div style="display:flex;align-items:center;gap:0.5rem;background:#f0f9ff;border:1px solid #bae6fd;border-radius:0.75rem;padding:0.6rem 0.9rem;margin-top:auto;">
+                            <i data-lucide="graduation-cap" style="color:#002147;width:0.9rem;height:0.9rem;flex-shrink:0;"></i>
+                            <span style="font-size:0.77rem;font-weight:700;color:#002147;">Entry: </span>
+                            <span style="font-size:0.77rem;color:#475569;">@course.Entry</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- ═══════ CTA STRIP ═══════ -->
+    <section style="background:linear-gradient(135deg,#002147,#0a3060);padding:4rem 2rem;margin-bottom:0;">
+        <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+            <div>
+                <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#00b4d8;margin-bottom:0.5rem;">Ready to Enrol?</p>
+                <h2 class="font-serif font-bold" style="font-size:clamp(1.5rem,3vw,2.2rem);color:white;margin:0;">Start Your Journey at CeyBEC Campus</h2>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <a href="/contact"
+                   style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:#00b4d8;color:#002147;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;border-radius:9999px;text-decoration:none;box-shadow:0 8px 20px rgba(0,180,216,0.3);transition:transform 0.2s;"
+                   onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <i data-lucide="send" style="width:1rem;height:1rem;"></i> Enquire Now
+                </a>
+                <a href="/abroad"
+                   style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:rgba(255,255,255,0.12);color:white;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;border-radius:9999px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);"
+                   onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
+                    <i data-lucide="globe" style="width:1rem;height:1rem;"></i> Study Abroad
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<style>
+    .acad-hero-in {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: acadFadeUp 0.7s ease forwards;
+    }
+    .acad-hero-in:nth-child(1) { animation-delay: 0.1s; }
+    .acad-hero-in:nth-child(2) { animation-delay: 0.25s; }
+    .acad-hero-in:nth-child(3) { animation-delay: 0.4s; }
+    .acad-hero-in:nth-child(4) { animation-delay: 0.55s; }
+
+    @@keyframes acadFadeUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .acad-fade {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .acad-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @@media (max-width: 1200px) {
+        .acad-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+    @@media (max-width: 860px) {
+        .acad-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @@media (max-width: 540px) {
+        .acad-grid { grid-template-columns: 1fr !important; }
+    }
+</style>
+
+@code {
+    private record AcademicCourse(string Image, string Title, string Category, string Duration, List<string> Highlights, string Entry);
+
+    private List<AcademicCourse> courses = new()
+    {
+        new("1.jpg", "Mental Health Care Assistant (NVQ)", "Healthcare", "3 months · Online/In-Person",
+            new() { "Intro to mental health disorders", "Crisis intervention techniques", "Counseling basics & active listening", "Rehabilitation support", "Field exposure" }, "None"),
+        new("2.jpg", "Pharmacy Technician", "Healthcare", "6–12 months · Online/In-Person",
+            new() { "Pharmaceutical science basics", "Medication dispensing", "UK pharmacy regulations", "Drug interactions", "Inventory management" }, "Science O/L or A-Level"),
+        new("3.jpg", "Caregiver (NVQ)", "Healthcare", "3 months · Online/In-Person",
+            new() { "Elderly/disabled care techniques", "Patient mobility assistance", "Basic first aid & hygiene", "Healthcare communication", "Patient confidentiality" }, "None"),
+        new("4.jpg", "Psychology & Clinical Counselling", "Psychology", "1 year · Online/In-Person",
+            new() { "Psychological theories", "CBT techniques", "Mental health assessments", "Group therapy methods", "Clinical ethics" }, "O/L or A-Level"),
+        new("5.jpg", "AAT Stages 1 / 2 / 3", "Finance", "6 months/stage",
+            new() { "Financial accounting", "Management accounting", "Sri Lankan taxation", "Auditing skills", "Business ethics" }, "O/L for Stage 1"),
+        new("6.jpg", "Civil Engineering", "Engineering", "2–3 years",
+            new() { "Structural engineering", "Construction techniques", "Sustainable development", "Project management", "Fieldwork experience" }, "O/L or A-Level Science"),
+        new("7.jpg", "IELTS Preparation", "Language", "2–3 months",
+            new() { "All test modules coverage", "Exam strategies", "Mock tests", "Personalised feedback", "Language improvement" }, "Basic English"),
+        new("8.jpg", "JLPT Preparation", "Language", "3–6 months",
+            new() { "Japanese grammar", "Listening comprehension", "Cultural context", "Kanji writing systems", "Progress tests" }, "Basic Japanese (N5+)"),
+    };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("lucide.createIcons");
+            await JS.InvokeVoidAsync("initAcademicsPage");
+        }
+    }
+}
